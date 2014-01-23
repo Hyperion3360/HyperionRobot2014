@@ -31,4 +31,20 @@ public class CanonSpinner extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
+    
+    public void PrepareTopGoalShot(){
+        allWheelSpinnerMotor.set(1);
+    }
+    
+    public void StopSpinning(){
+        allWheelSpinnerMotor.set(0);
+    }
+    
+    public void PrepareLowSpeedShot(){
+        allWheelSpinnerMotor.set(0.6);
+    }
+    
+    public void PrepareCatchSpin(){
+        allWheelSpinnerMotor.set(-.7);
+    }
 }
