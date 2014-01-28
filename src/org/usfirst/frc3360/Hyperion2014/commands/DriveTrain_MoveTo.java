@@ -18,12 +18,18 @@ public class  DriveTrain_MoveTo extends Command {
     double m_dbTopSpeedMS = 0;
     double m_dbTimeToTravel = 0;
     
+    boolean m_bBoostMode = true;
+    double m_dbBoostTime = 0;
+    static final double m_dbBootTimeRatioS2M = 0.3;
+    static final double m_dbBootPowerRatio = 1.8;
+    
     public DriveTrain_MoveTo(double dbDistanceM, double dbTopSpeedMS) {
+        
         // La distance ne peut pas etre negative!!!!
         m_dbDistanceM = dbDistanceM;
         m_dbTopSpeedMS = dbTopSpeedMS;
         
-        m_dbTimeToTravel = Math.abs(dbDistanceM) / Math.abs(dbTopSpeedMS);
+        m_dbBoostTime = m_dbBootTimeRatioS2M * Math.abs(dbTopSpeedMS);
         
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -39,7 +45,27 @@ public class  DriveTrain_MoveTo extends Command {
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.driveTrain.setSpeed(m_dbTopSpeedMS, m_dbTopSpeedMS);        
+        System.out.println("timeSinceInitialized=" + timeSinceInitialized());
+        if (timeSinceInitialized() < m_dbBoostTime)
+        {
+            System.out.println("Mode=BOOST");
+            m_bBoostMode = true;
+        }
+        else
+        {
+            System.out.println("Mode=COAST");
+            m_bBoostMode = false;
+        }
+                
+        if (m_bBoostMode)
+        {
+            Robot.driveTrain.setSpeed(m_dbBootPowerRatio * m_dbTopSpeedMS,
+                                      m_dbBootPowerRatio * m_dbTopSpeedMS);
+        }
+        else
+        {
+            Robot.driveTrain.setSpeed(m_dbTopSpeedMS, m_dbTopSpeedMS);  
+        }    
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
