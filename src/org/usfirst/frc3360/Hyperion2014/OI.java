@@ -12,8 +12,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonAngle_HandleAutoMode;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonAngle_HandleManualMode;
-import org.usfirst.frc3360.Hyperion2014.commands.CanonAngle_SetShooterAngle;
-import org.usfirst.frc3360.Hyperion2014.commands.CanonAngle_SetShooterAngle2;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonShooter_Shoot;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_HandleManualMode;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_HandlePresetMode;
