@@ -91,21 +91,21 @@ public class OI {
         Button_Vision_FindHotTarget.whenPressed(new Vision_FindHotTarget());
         
         
-        Button_CanonShooter_Shoot = new JoystickButton(coPilotJoystick, 1);
+        Button_CanonShooter_Shoot = new JoystickButton(coPilotJoystick, 5);
         Button_CanonShooter_Shoot.whenPressed(new CanonShooter_Shoot());
         
         
-        Button_CanonSpinner_ShootSpeed = new JoystickButton(coPilotJoystick, 2);
+        Button_CanonSpinner_ShootSpeed = new JoystickButton(coPilotJoystick, 11);
         Button_CanonSpinner_ShootSpeed.whileHeld(new CanonSpinner_PrepareTopGoal());
         
-        Button_CanonSpinner_CatchSpeed = new JoystickButton(coPilotJoystick, 3);
+        Button_CanonSpinner_CatchSpeed = new JoystickButton(coPilotJoystick, 12);
         Button_CanonSpinner_CatchSpeed.whileHeld(new CanonSpinner_ReceivePass());
     
-        Button_CanonSpinner_SetManualMode = new JoystickButton(coPilotJoystick, 4);
+        Button_CanonSpinner_SetManualMode = new JoystickButton(coPilotJoystick, 6);
         Button_CanonSpinner_SetManualMode.whileHeld(new CanonSpinner_HandleManualMode());
         Button_CanonSpinner_SetManualMode.whenInactive(new CanonSpinner_HandlePresetMode());
         
-        Button_CanonAngle_SetManualMode = new JoystickButton(coPilotJoystick, 5);
+        Button_CanonAngle_SetManualMode = new JoystickButton(coPilotJoystick, 8);
         Button_CanonAngle_SetManualMode.whileHeld(new CanonAngle_HandleManualMode());
         Button_CanonAngle_SetManualMode.whenInactive(new CanonAngle_HandleAutoMode());
         
