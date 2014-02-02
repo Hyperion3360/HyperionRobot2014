@@ -31,7 +31,7 @@ public class  CanonAngle_HandleAutoMode extends Command {
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.oi.getCoPilotJoystick().getRawButton(5);
+        return Robot.oi.getCoPilotJoystick().getRawButton(8);
     }
     // Called once after isFinished returns true
     protected void end() {

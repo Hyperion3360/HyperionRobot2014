@@ -50,7 +50,9 @@ public class CanonShooter extends Subsystem {
         return true;
     }
         else{
+            
             return false;
+            
         }
     }
 }

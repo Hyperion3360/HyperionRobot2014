@@ -31,7 +31,7 @@ public class  CanonSpinner_HandlePresetMode extends Command {
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.oi.getCoPilotJoystick().getRawButton(4);
+        return Robot.oi.getCoPilotJoystick().getRawButton(6);
     }
     // Called once after isFinished returns true
     protected void end() {
