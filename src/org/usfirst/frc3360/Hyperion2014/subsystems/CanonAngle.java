@@ -141,7 +141,7 @@ public class CanonAngle extends Subsystem {
             
         }
         
-        // test if the canon can move, then move it (angle tolerance not added yet)
+        // test if the canon can and needs to move, then move it (angle tolerance not added yet)
         
         if (requestedAngleValue > anglePot.getAverageVoltage() && anglePot.getAverageVoltage() < minCanonAngleValue){
             allWheelAngleMotor.set(1);
