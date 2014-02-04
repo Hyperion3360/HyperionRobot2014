@@ -87,4 +87,9 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
         LiveWindow.run();
     }
+    
+    public void disabledInit() {
+        vision.stopVision();
+    }
+    
 }
