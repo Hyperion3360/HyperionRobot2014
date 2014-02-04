@@ -39,18 +39,6 @@ public class DriveTrain extends Subsystem {
         setDefaultCommand(new DriveTrain_MoveWithJoystick());
     }
     
-    public void setAutonomous()
-    {
-        System.out.println("DT: Going to autonomous mode");
-        setDefaultCommand(null);
-    }
-    
-    public void setTeleoperated()
-    {
-        System.out.println("DT: Going to teleoperated mode");
-        setDefaultCommand(new DriveTrain_MoveWithJoystick());
-    }
-    
     public void setSpeed(double leftSpeedMS, double rightSpeedMS)
     {
         SmartDashboard.putNumber("Left motor speed", leftSpeedMS);

@@ -8,7 +8,6 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 package org.usfirst.frc3360.Hyperion2014.commands;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
@@ -16,9 +15,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousBackAndForth extends CommandGroup {
     
     public  AutonomousBackAndForth(double dbDistanceMetre, double dbTopSpeed, int nRepetition) {     
-        
-        addSequential(new DriveTrain_SetAutonomous());
-        
         for (int nIndex = 0; nIndex < nRepetition; nIndex++)
         {
             addSequential(new DriveTrain_MoveTo(dbDistanceMetre,dbTopSpeed));
@@ -26,22 +22,5 @@ public class AutonomousBackAndForth extends CommandGroup {
             addSequential(new DriveTrain_MoveTo(dbDistanceMetre, -dbTopSpeed));
             addSequential(new DriveTrain_Idle(3));
         }
-        
-        // The autonomous command can be canceled before this sequential command is reached.
-        // However, we absolutly need to call this method at the end. Thus, we need
-        // to find the proper way to initialize and terminate a command group.
-        addSequential(new DriveTrain_SetTeleoperated());
-    }
-    
-    protected void initialize() {
-        System.out.println("ABAF-INIT");
-    }
-    
-    protected void end() {
-        System.out.println("ABAF-END");
-        
-    }
-    protected void interrupted() {
-        System.out.println("ABAF-INT");
     }
 }
