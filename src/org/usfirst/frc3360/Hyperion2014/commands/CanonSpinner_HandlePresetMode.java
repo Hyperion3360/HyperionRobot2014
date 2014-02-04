@@ -13,8 +13,8 @@ import org.usfirst.frc3360.Hyperion2014.Robot;
 /**
  *
  */
-public class  CanonSpinner_PreparePass extends Command {
-    public CanonSpinner_PreparePass() {
+public class  CanonSpinner_HandlePresetMode extends Command {
+    public CanonSpinner_HandlePresetMode() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
 	
@@ -27,10 +27,11 @@ public class  CanonSpinner_PreparePass extends Command {
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        Robot.canonSpinner.HandleSpinnerPresetMode();
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.oi.getCoPilotJoystick().getRawButton(6);
     }
     // Called once after isFinished returns true
     protected void end() {
