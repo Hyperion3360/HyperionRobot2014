@@ -27,11 +27,13 @@ public class  CanonAngle_HandleManualMode extends Command {
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    //    System.out.println("angle manual 1");
         Robot.canonAngle.HandleManualMode();
+     //   System.out.println("angle manual 2");
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Robot.oi.getCoPilotJoystick().getRawButton(8);
+        return Robot.oi.getCoPilotJoystick().getRawButton(8);
     }
     // Called once after isFinished returns true
     protected void end() {

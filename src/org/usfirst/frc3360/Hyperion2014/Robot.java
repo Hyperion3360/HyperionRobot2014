@@ -80,6 +80,8 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        
+        System.out.println("NATHAN JTE L'AI DIT" + Robot.oi.getCoPilotJoystick().getRawAxis(2));
     }
     /**
      * This function called periodically during test mode

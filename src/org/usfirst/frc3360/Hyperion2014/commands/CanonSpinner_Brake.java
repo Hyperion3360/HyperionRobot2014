@@ -27,7 +27,9 @@ public class  CanonSpinner_Brake extends Command {
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+     //   System.out.println("stopspin 1");
         Robot.canonSpinner.StopSpinning();
+     //   System.out.println("stopspin 2");
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
