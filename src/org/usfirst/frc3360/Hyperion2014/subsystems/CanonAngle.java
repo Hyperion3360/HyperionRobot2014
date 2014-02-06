@@ -15,6 +15,7 @@ import org.usfirst.frc3360.Hyperion2014.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc3360.Hyperion2014.Robot;
 import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
@@ -87,30 +88,49 @@ public class CanonAngle extends Subsystem {
         System.out.println("requested angle" + requestedAngleValue);
         
         
-        angleDifference = requestedAngleValue - anglePot.getAverageVoltage();
+        angleDifference = requestedAngleValue - currentAngle;
         
-        desiredSpeed = angleDifference * 5;
+         // First check limit switch states
+        SmartDashboard.putBoolean("Upper angle limit switch", upperAngleLimitSwitch.get());
+        SmartDashboard.putBoolean("Lower angle limit switch", lowerAngleLimitSwitch.get());
         
-        System.out.println("disiredSpeed" + desiredSpeed);
-        
-        if (currentAngle < requestedAngleValue){
-            if (currentAngle + MaxAngleTolerance > requestedAngleValue){
-                requestedAngleValue = currentAngle;
-                allWheelAngleMotor.set(0);
-            }
-            else if(currentAngle + MaxAngleTolerance < requestedAngleValue && anglePot.getAverageVoltage() < maxCanonAngleValue) {
-                allWheelAngleMotor.set(desiredSpeed);
-            }
+        if (!upperAngleLimitSwitch.get() && angleDifference > 0) {
+            desiredSpeed = 0;
         }
-        if (currentAngle > requestedAngleValue){
-            if (currentAngle - MaxAngleTolerance < requestedAngleValue){
-                requestedAngleValue = currentAngle;
-                allWheelAngleMotor.set(0);
-            }
-            else if(currentAngle - MaxAngleTolerance > requestedAngleValue && anglePot.getAverageVoltage() > minCanonAngleValue) {
-                allWheelAngleMotor.set(desiredSpeed);
-            }
+        else if (!lowerAngleLimitSwitch.get() && angleDifference < 0) {
+            desiredSpeed = 0;
         }
+        // Dead zone management
+        else if (Math.abs(angleDifference) < MaxAngleTolerance) {
+            desiredSpeed = 0;
+        }
+        // If everything ok send command
+        else {
+            desiredSpeed = angleDifference * 5;
+        }
+        
+        System.out.println("desiredSpeed" + desiredSpeed);
+        allWheelAngleMotor.set(desiredSpeed);
+        
+        // Previous version (harder to manage limit switches and to understand)
+//        if (currentAngle < requestedAngleValue){
+//            if (currentAngle + MaxAngleTolerance > requestedAngleValue){
+//                requestedAngleValue = currentAngle;
+//                allWheelAngleMotor.set(0);
+//            }
+//            else if(currentAngle + MaxAngleTolerance < requestedAngleValue && anglePot.getAverageVoltage() < maxCanonAngleValue) {
+//                allWheelAngleMotor.set(desiredSpeed);
+//            }
+//        }
+//        if (currentAngle > requestedAngleValue){
+//            if (currentAngle - MaxAngleTolerance < requestedAngleValue){
+//                requestedAngleValue = currentAngle;
+//                allWheelAngleMotor.set(0);
+//            }
+//            else if(currentAngle - MaxAngleTolerance > requestedAngleValue && anglePot.getAverageVoltage() > minCanonAngleValue) {
+//                allWheelAngleMotor.set(desiredSpeed);
+//            }
+//        }
     }
     
     public void HandleAutoMode(){
