@@ -31,8 +31,10 @@ public class CanonAngle extends Subsystem {
     
     // values to be changed after testing
     
-    final double maxCanonAngleValue = 4.8;
-    final double minCanonAngleValue = 0.7;
+    //the maxAngle randomly occured to be PI  - Antoine
+    
+    final double maxCanonAngleValue = 3.16;
+    final double minCanonAngleValue = -0.1;
     final double MaxAngleTolerance = 0.1;
     
     double desiredSpeed = 0;
@@ -73,7 +75,7 @@ public class CanonAngle extends Subsystem {
         // the throttle value is coverted to a percentage of the canon angle....
         // exemple: 0.10 value = 10% of the maximum angle 
         
-        throttleValue = (Math.abs(Robot.oi.getCoPilotJoystick().getRawAxis(2) * 1.4925)) + 0.1194;
+        throttleValue = 1-(Math.abs(Robot.oi.getCoPilotJoystick().getRawAxis(2)));
     
         System.out.println(throttleValue + "throttle value");
         
@@ -106,7 +108,7 @@ public class CanonAngle extends Subsystem {
         }
         // If everything ok send command
         else {
-            desiredSpeed = angleDifference * 5;
+            desiredSpeed = angleDifference *1.5;
         }
         
         System.out.println("desiredSpeed" + desiredSpeed);

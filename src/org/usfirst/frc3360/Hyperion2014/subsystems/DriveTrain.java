@@ -55,6 +55,6 @@ public class DriveTrain extends Subsystem {
         }
         
    //     System.out.println("drivetrain loop");
-        allWheelRobotDrive.tankDrive(dLeftJoystick , dRightJoystick);
+        allWheelRobotDrive.tankDrive(-dLeftJoystick , -dRightJoystick);
     }
 }
