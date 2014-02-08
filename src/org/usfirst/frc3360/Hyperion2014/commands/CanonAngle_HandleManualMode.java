@@ -8,6 +8,8 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 package org.usfirst.frc3360.Hyperion2014.commands;
+import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc3360.Hyperion2014.Robot;
 /**
@@ -33,13 +35,20 @@ public class  CanonAngle_HandleManualMode extends Command {
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.oi.getCoPilotJoystick().getRawButton(8);
+        return false;
     }
     // Called once after isFinished returns true
     protected void end() {
+        CommandExit();
     }
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        CommandExit();
+    }
+    
+    private void CommandExit() {
+        Robot.canonAngle.AngleStop();
+        Robot.canonAngle.ResetSecurity();
     }
 }

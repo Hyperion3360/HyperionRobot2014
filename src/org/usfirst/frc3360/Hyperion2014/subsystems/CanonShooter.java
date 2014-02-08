@@ -9,7 +9,6 @@
 // it from being updated in the future.
 package org.usfirst.frc3360.Hyperion2014.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Timer;
 import org.usfirst.frc3360.Hyperion2014.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
 /**
@@ -36,8 +35,7 @@ public class CanonShooter extends Subsystem {
     
     public void shootBall(){
         shooterSolenoid.set(DoubleSolenoid.Value.kForward);
-        ShootTime = System.currentTimeMillis();
-        
+        ShootTime = System.currentTimeMillis();    
     }
     
     public void returnhome(){
