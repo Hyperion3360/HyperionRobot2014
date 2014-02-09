@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.Solenoid;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -47,8 +48,14 @@ public class RobotMap {
     
     public static AnalogChannel distanceUltrasonic;
     
+    // the solenoid is only the power supply for the ultrasonic
+    // wich is working on DC 24V and will only be setted to true
+    public static Solenoid UltrasonicPower;
+    
     public static void init() {
         
+        
+        UltrasonicPower = new Solenoid(1, 3);
         
         distanceUltrasonic = new AnalogChannel(2);
         
@@ -68,13 +75,7 @@ public class RobotMap {
         canonSpinnerAllWheelSpinnerMotor = new Talon(1, 3);
 	LiveWindow.addActuator("CanonSpinner", "AllWheelSpinnerMotor", (Talon) canonSpinnerAllWheelSpinnerMotor);
         
-     //   canonSpinnerLeftWheelCurrentSensor = new AnalogChannel(1, 2);
-//	LiveWindow.addSensor("CanonSpinner", "LeftWheelCurrentSensor", canonSpinnerLeftWheelCurrentSensor);
-        
-    //    canonSpinnerRightWheelCurrentSensor = new AnalogChannel(1, 3);
-	//LiveWindow.addSensor("CanonSpinner", "RightWheelCurrentSensor", canonSpinnerRightWheelCurrentSensor);
-        
-       canonSpinnerSafetyLeftSafetyServo = new Servo(1, 5);
+        canonSpinnerSafetyLeftSafetyServo = new Servo(1, 5);
 	LiveWindow.addActuator("CanonSpinnerSafety", "LeftSafetyServo", canonSpinnerSafetyLeftSafetyServo);
         
         canonSpinnerSafetyRightSafetyServo = new Servo(1, 6);

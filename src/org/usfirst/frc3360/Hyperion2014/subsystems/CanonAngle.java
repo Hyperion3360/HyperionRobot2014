@@ -99,72 +99,30 @@ public class CanonAngle extends Subsystem {
     public void HandleAutoMode(){
         
         System.out.println(anglePot.getAverageVoltage() + "potentiometer value");
+        
+        System.out.println(distanceUltrasonic.getAverageVoltage() + "ultrasonic voltage");
 
-        allWheelAngleMotor.set(0);
-//        
-//        // get the distance with the ultrasonic in order to set the right angle by itself
-//        
-//        currentDistance = (int)distanceUltrasonic.getAverageValue();
-//        
-//        angleCorrection = Robot.oi.getCoPilotJoystick().getRawAxis(4);
-//        
-//        //switch loop for different distances (will eventually use an algorithm after tests)
-//        
-//        switch (currentDistance){
-//            
-//            case 1:
-//                    {     
-//                requestedAngleValue = 1 + angleCorrection;
-//                break;
-//            }
-//            case 2:
-//            {
-//                requestedAngleValue = 2 + angleCorrection;
-//                break;
-//            }
-//            
-//            case 3:
-//            {
-//                requestedAngleValue = 3 + angleCorrection;
-//                break;
-//            }
-//            case 4:
-//            {
-//                requestedAngleValue = 4 + angleCorrection;
-//                break;
-//            }
-//            case 5:
-//            {
-//                requestedAngleValue = 5 + angleCorrection;
-//                break;
-//            }
-//            case 6:
-//            {
-//                requestedAngleValue = 6 + angleCorrection;
-//                break;
-//            }
-//            case 7:
-//            {
-//                requestedAngleValue = 7 + angleCorrection;
-//                break;
-//            }
-//            case 8:
-//            {
-//                requestedAngleValue = 8 + angleCorrection;
-//                break;
-//            }
-//            
-//        }
-//        
-//        // test if the canon can and needs to move, then move it (angle tolerance not added yet)
-//        
-//        if (requestedAngleValue > anglePot.getAverageVoltage() && anglePot.getAverageVoltage() < minCanonAngleValue){
-//            allWheelAngleMotor.set(1);
-//        }
-//        
-//        if (requestedAngleValue < anglePot.getAverageVoltage() && anglePot.getAverageVoltage() > minCanonAngleValue){
-//            allWheelAngleMotor.set(-1);
-//        }
+        
+        //insert fuction here
+        requestedAngleValue = 1;
+        
+        //insert function here
+        
+        currentAngle = anglePot.getAverageVoltage();
+        
+        angleDifference = requestedAngleValue - currentAngle;
+     
+        currentDistance = (int)distanceUltrasonic.getAverageVoltage();
+        
+       
+       
+           desiredSpeed = angleDifference * 3;
+           
+           GetSafeSpeed(desiredSpeed);
+           
+           allWheelAngleMotor.set(desiredSpeed);
+       
+       
     }
     
     private double GetSafeSpeed(double speed)

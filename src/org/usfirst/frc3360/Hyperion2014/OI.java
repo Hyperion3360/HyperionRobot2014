@@ -69,6 +69,7 @@ public class OI {
     
     public JoystickButton Button_CanonAngle_SetManualMode;
     public JoystickButton Button_CanonAngle_ResetSecurity;
+    public JoystickButton Button_CanonAngle_SetAutoAngle;
     
     
     public JoystickButton Button_Vision_FindHotTarget;
@@ -104,6 +105,10 @@ public class OI {
         
         Button_CanonAngle_ResetSecurity = new JoystickButton(coPilotJoystick, 9);
         Button_CanonAngle_ResetSecurity.whenPressed(null);
+        
+        Button_CanonAngle_SetAutoAngle = new JoystickButton(coPilotJoystick, 2);
+        Button_CanonAngle_SetAutoAngle.whileHeld(new CanonAngle_HandleAutoMode());
+        Button_CanonAngle_SetAutoAngle.whenInactive(new CanonAngle_HandleManualMode());
     
     //    Button_CanonSpinner_SetManualMode = new JoystickButton(coPilotJoystick, 6);
     //    Button_CanonSpinner_SetManualMode.whileHeld(new CanonSpinner_HandleManualMode());
