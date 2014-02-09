@@ -43,11 +43,10 @@ public class  DriveTrain_MoveTo extends Command {
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-<<<<<<< HEAD
-        return true;
-=======
+
         return isTimedOut();
->>>>>>> b04733cfca0a1b23fa5dd0a36b983a4aceddd9ca
+
+
     }
     // Called once after isFinished returns true
     protected void end() {
