@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc3360.Hyperion2014.commands.AutonomousBackAndForth;
+import org.usfirst.frc3360.Hyperion2014.commands.CanonAngle_ResetSecurity;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonShooter_Shoot;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_PrepareTopGoal;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_ReceivePass;
@@ -110,7 +111,7 @@ public class OI {
         Button_CanonSpinner_CatchSpeed.whileHeld(new CanonSpinner_ReceivePass());
         
         Button_CanonAngle_ResetSecurity = new JoystickButton(coPilotJoystick, 9);
-        Button_CanonAngle_ResetSecurity.whenPressed(null);
+        Button_CanonAngle_ResetSecurity.whenPressed(new CanonAngle_ResetSecurity());
     
     //    Button_CanonSpinner_SetManualMode = new JoystickButton(coPilotJoystick, 6);
     //    Button_CanonSpinner_SetManualMode.whileHeld(new CanonSpinner_HandleManualMode());
