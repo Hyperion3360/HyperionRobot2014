@@ -27,12 +27,6 @@ public class  DriveTrain_MoveWithJoystick extends Command {
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-
-        System.out.println("movewithjoysticks 1");
-        Robot.driveTrain.MoveWithJoysticks();
-        System.out.println("movewithjoysticks 2");
-        
-
         Robot.driveTrain.driveWithJoystick();
     }
     // Make this return true when this Command no longer needs to run execute()
