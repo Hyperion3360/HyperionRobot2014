@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 import org.usfirst.frc3360.Hyperion2014.RobotMap;
 import org.usfirst.frc3360.Hyperion2014.Robot;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc3360.Hyperion2014.commands.DriveTrain_MoveWithJoystick;
 
 /**
@@ -22,7 +23,7 @@ import org.usfirst.frc3360.Hyperion2014.commands.DriveTrain_MoveWithJoystick;
  */
 public class DriveTrain extends Subsystem {
 
-    static final double m_DEAD_ZONE_MARGIN = 0.05;
+    static final double m_dbDEAD_ZONE_MARGIN = 0.05;
 
     static final double m_dbRATIO_SPEED_TO_POWER = 0.90;
     

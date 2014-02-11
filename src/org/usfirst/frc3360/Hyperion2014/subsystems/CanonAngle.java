@@ -42,6 +42,7 @@ public class CanonAngle extends Subsystem {
     double m_dbRequestedAngleValue;
     double m_dbThrottleValue;
     
+    double m_dbCurrentDistance;
     
     double m_dbAngleCorrection;
     
@@ -90,26 +91,26 @@ public class CanonAngle extends Subsystem {
         // Automatic mode is currently disabled.
         System.out.println(anglePot.getAverageVoltage() + "potentiometer value");
         
-        System.out.println(distanceUltrasonic.getAverageVoltage() + "ultrasonic voltage");
+        System.out.println(Robot.vision.getDistance() + "vison distance");
 
         //insert fuction here
-        requestedAngleValue = 1;
+        m_dbRequestedAngleValue = 1;
         
         //insert function here
         
-        currentAngle = anglePot.getAverageVoltage();
+        m_dbCurrentAngle = anglePot.getAverageVoltage();
         
-        angleDifference = requestedAngleValue - currentAngle;
+        m_dbAngleDifference = m_dbRequestedAngleValue - m_dbCurrentAngle;
      
-        currentDistance = (int)distanceUltrasonic.getAverageVoltage();
+        m_dbCurrentDistance = Robot.vision.getDistance();
         
        
        
-           desiredSpeed = angleDifference * 3;
-           
-           desiredSpeed = GetSafeSpeed(desiredSpeed);
-           
-           allWheelAngleMotor.set(desiredSpeed);
+        m_dbDesiredSpeed = m_dbAngleDifference * 3;
+
+        m_dbDesiredSpeed = GetSafeSpeed(m_dbDesiredSpeed);
+
+        allWheelAngleMotor.set(m_dbDesiredSpeed);
     }
     
     private double GetSafeSpeed(double speed)
