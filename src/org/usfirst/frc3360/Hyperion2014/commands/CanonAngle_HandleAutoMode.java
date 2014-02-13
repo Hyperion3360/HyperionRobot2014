@@ -31,6 +31,8 @@ public class  CanonAngle_HandleAutoMode extends Command {
         
         // TODO 
         
+        Robot.canonAngle.setAngleAuto();
+        
      //   System.out.println("angle auto 2");
     }
     // Make this return true when this Command no longer needs to run execute()

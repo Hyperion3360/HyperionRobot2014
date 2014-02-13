@@ -93,6 +93,7 @@ public class Robot extends IterativeRobot {
     }
     
     public void disabledInit() {
+       
         vision.stopVision();
         canonAngle.AngleStop();
         canonAngle.ResetSecurity();
