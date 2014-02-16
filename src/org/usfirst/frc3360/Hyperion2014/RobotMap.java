@@ -89,20 +89,20 @@ public class RobotMap {
         driveTrainAllWheelRobotDrive.setExpiration(0.1);
         driveTrainAllWheelRobotDrive.setSensitivity(0.5);
         driveTrainAllWheelRobotDrive.setMaxOutput(1.0);
-        driveTrainAllWheelRobotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-        driveTrainAllWheelRobotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);  
+        driveTrainAllWheelRobotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, false);
+        driveTrainAllWheelRobotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, false);  
 
         driveTrainRobotFrameGyro = new Gyro(1, 1);
 	LiveWindow.addSensor("DriveTrain", "RobotFrameGyro", driveTrainRobotFrameGyro);
         driveTrainRobotFrameGyro.setSensitivity(0.007);
 
-        driveTrainleftWheelsEncoder = new Encoder(1, 3, 1, 4, true, EncodingType.k4X);
+        driveTrainleftWheelsEncoder = new Encoder(1, 3, 1, 4, false, EncodingType.k4X);
 	LiveWindow.addSensor("DriveTrain", "leftWheelsEncoder", driveTrainleftWheelsEncoder);
         driveTrainleftWheelsEncoder.setDistancePerPulse(1.0);
         driveTrainleftWheelsEncoder.setPIDSourceParameter(PIDSourceParameter.kRate);
         driveTrainleftWheelsEncoder.start();
 
-        driveTrainrightWheelsEncoder = new Encoder(1, 5, 1, 6, false, EncodingType.k4X);
+        driveTrainrightWheelsEncoder = new Encoder(1, 5, 1, 6, true, EncodingType.k4X);
 	LiveWindow.addSensor("DriveTrain", "rightWheelsEncoder", driveTrainrightWheelsEncoder);
         driveTrainrightWheelsEncoder.setDistancePerPulse(1.0);
         driveTrainrightWheelsEncoder.setPIDSourceParameter(PIDSourceParameter.kRate);

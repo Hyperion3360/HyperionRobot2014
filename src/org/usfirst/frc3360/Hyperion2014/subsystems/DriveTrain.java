@@ -67,8 +67,8 @@ public class DriveTrain extends Subsystem {
         double dRightJoystick = -Robot.oi.getDriverRightJoystick().getRawAxis(2);
         SmartDashboard.putNumber("Rigth motor speed", dRightJoystick );
 
-        System.out.println("teleop: left=" + -Robot.oi.getDriverLeftJoystick().getRawAxis(2) +
-                           ", right=" + -Robot.oi.getDriverLeftJoystick().getRawAxis(4));
+        System.out.println("teleop: left=" + dLeftJoystick +
+                           ", right=" + dRightJoystick);
 
         // Give a dead zone to the joystick.        
         if (dLeftJoystick < m_dbDEAD_ZONE_MARGIN && dLeftJoystick > -m_dbDEAD_ZONE_MARGIN)
@@ -81,7 +81,17 @@ public class DriveTrain extends Subsystem {
             dRightJoystick = 0;
         }
 
-        allWheelRobotDrive.tankDrive(-dLeftJoystick , -dRightJoystick);
+        allWheelRobotDrive.tankDrive(dLeftJoystick , dRightJoystick);
+        
+        
+        System.out.println("Left" + leftWheelsEncoder.getDistance());
+        System.out.println("Right" + rightWheelsEncoder.getDistance());
+        SmartDashboard.putNumber("Distance droit", rightWheelsEncoder.getDistance());
+        SmartDashboard.putNumber("Distance gauche", leftWheelsEncoder.getDistance());
+        System.out.println("Vitesse droite (m par s)" + leftWheelsEncoder.getRate());
+        System.out.println("Vitesse gauche (m par s)" + rightWheelsEncoder.getRate());
+        SmartDashboard.putNumber("Vitesse droite (m)", rightWheelsEncoder.getRate());
+        SmartDashboard.putNumber("Vitesse gauche (m)", leftWheelsEncoder.getRate());
     }
 
 
@@ -90,14 +100,14 @@ public class DriveTrain extends Subsystem {
         leftWheelsEncoder.reset();
         rightWheelsEncoder.reset();
         // Use these 2 lines to calibrate number of pulses
-        //leftWheelsEncoder.setDistancePerPulse(1);
-        //rightWheelsEncoder.setDistancePerPulse(1);
+        leftWheelsEncoder.setDistancePerPulse(5/11828.4);
+        rightWheelsEncoder.setDistancePerPulse(5/11575.4);
         
         // Use these 2 lines when calibrated
-        leftWheelsEncoder.setDistancePerPulse(0.0008284961);
-        rightWheelsEncoder.setDistancePerPulse(0.00082338);
+        //leftWheelsEncoder.setDistancePerPulse(0.0008284961);
+        //rightWheelsEncoder.setDistancePerPulse(0.00082338);
         
-        leftWheelsEncoder.setReverseDirection(true);
+        //leftWheelsEncoder.setReverseDirection(true);
         leftWheelsEncoder.start();
         rightWheelsEncoder.start();
 
@@ -113,16 +123,16 @@ public class DriveTrain extends Subsystem {
         double sentCommandLeft = m_dbActualCommandLeft;
         double sentCommandRight = m_dbActualCommandRight;
         controlSpeed(speed);
-        if (Math.abs(m_dbActualCommandLeft) < 0.65) {
+        /*if (Math.abs(m_dbActualCommandLeft) < 0.65) {
             sentCommandLeft = 0;
-        } else if (m_dbActualCommandLeft > 1) {
+        } else */if (m_dbActualCommandLeft > 1) {
             sentCommandLeft = 1;
         } else if (m_dbActualCommandLeft < -1) {
             sentCommandLeft = -1;
         }
-        if (Math.abs(m_dbActualCommandRight) < 0.5) {
+        /*if (Math.abs(m_dbActualCommandRight) < 0.5) {
             sentCommandRight = 0;
-        } else if (m_dbActualCommandRight > 1) {
+        } else */if (m_dbActualCommandRight > 1) {
             sentCommandRight = 1;
         } else if (m_dbActualCommandRight < -1) {
             sentCommandRight = -1;
@@ -144,7 +154,7 @@ public class DriveTrain extends Subsystem {
     public void initSpeedController() {
         m_dbActualCommandLeft = 0;
         m_dbActualCommandRight = 0;
-        m_dbControllerGain = SmartDashboard.getNumber("Speed controller gain", 0.02);
+        m_dbControllerGain = 0.03;
 
     }
 
@@ -170,5 +180,7 @@ public class DriveTrain extends Subsystem {
         SmartDashboard.putNumber("Erreur en vitesse droite (m par s)", speedErrorRight);
         SmartDashboard.putNumber("Commande gauche (-1 a 1)", m_dbActualCommandLeft);
         SmartDashboard.putNumber("Commande droite (-1 a 1)", m_dbActualCommandRight);
+        System.out.println("Commande gauche"+ m_dbActualCommandLeft);
+        System.out.println("Commande droit"+ m_dbActualCommandRight);
     }
 }

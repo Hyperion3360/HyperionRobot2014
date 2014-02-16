@@ -27,10 +27,11 @@ public class  DriveTrain_Move extends Command {
     }
     // Called just before this Command runs the first time
     protected void initialize() {
+        System.out.println("DriveTrain_Move::Init");
         Robot.driveTrain.initEncoders();
         Robot.driveTrain.initSpeedController();
-        m_distanceWanted = 5;//SmartDashboard.getNumber("Distance du mode autonome");
-        m_speedWanted = 1.2;//SmartDashboard.getNumber("Vitesse du mode autonome");
+        m_distanceWanted = 3;//SmartDashboard.getNumber("Distance du mode autonome");
+        m_speedWanted = 2;//SmartDashboard.getNumber("Vitesse du mode autonome");
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
@@ -43,9 +44,12 @@ public class  DriveTrain_Move extends Command {
     }
     // Called once after isFinished returns true
     protected void end() {
+        System.out.println("DriveTrain_Move::End");
     }
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        System.out.println("DriveTrain_Move::Int" + m_speedWanted);
+        
     }
 }

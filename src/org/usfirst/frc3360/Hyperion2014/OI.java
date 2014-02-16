@@ -18,6 +18,7 @@ import org.usfirst.frc3360.Hyperion2014.commands.CanonAngle_ResetSecurity;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonShooter_Shoot;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_PrepareTopGoal;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_ReceivePass;
+import org.usfirst.frc3360.Hyperion2014.commands.DriveTrain_Move;
 import org.usfirst.frc3360.Hyperion2014.commands.Vision_SetMode;
 import org.usfirst.frc3360.Hyperion2014.subsystems.Vision;
 /**
@@ -69,6 +70,8 @@ public class OI {
 
     
     public JoystickButton Button_CanonShooter_Shoot;
+    public JoystickButton Button_DriveTrain_MoveTo;
+    
     
     public JoystickButton Button_CanonSpinner_SetManualMode;
     public JoystickButton Button_CanonSpinner_ShootSpeed;
@@ -98,6 +101,9 @@ public class OI {
         SmartDashboard.putData("AutonomousBackAndForth1M", new AutonomousBackAndForth(1, 1, 2));
 
 
+        Button_DriveTrain_MoveTo = new JoystickButton(driverRightJoystick, 9);
+        Button_DriveTrain_MoveTo.whenPressed(new DriveTrain_Move());
+        
         stopVisionTracking = new JoystickButton(driverLeftJoystick, 1);
         stopVisionTracking.whenReleased(new Vision_SetMode(Vision.ms_VISION_TRACKING_MODE));
         startVisionTracking = new JoystickButton(driverLeftJoystick, 2);
