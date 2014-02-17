@@ -117,35 +117,11 @@ public class CanonAngle extends PIDSubsystem {
         double ThrottleValue = DriverStation.getInstance().getAnalogIn(1);
         
         System.out.println("ThrottleValue:" + ThrottleValue);
-    public void HandleManualMode(){
-        m_dbDesiredSpeed = -Robot.oi.getCoPilotJoystick().getRawAxis(4);
-        //System.out.println("HandleManualMode: desiredSpeed" + m_dbDesiredSpeed);
-        
-        m_dbCurrentAngle = getCurrentAngle();
-        //System.out.println("HandleManualMode: currentAngle" + m_dbCurrentAngle);
-        
-        m_dbDesiredSpeed = GetSafeSpeed(m_dbDesiredSpeed);
-        
-        //System.out.println("HandleManualMode: Motor speed" + m_dbDesiredSpeed);
-        allWheelAngleMotor.set(m_dbDesiredSpeed);
-    }
-    
-    public void HandleAutoMode(){
-        // Automatic mode is currently disabled.
-        //System.out.println(anglePot.getAverageVoltage() + "potentiometer value");
-        
-        //System.out.println(Robot.vision.getDistance() + "vison distance");
-
-        //insert fuction here
-        m_dbRequestedAngleValue = 1;
         
         m_dbAngleWanted = (ms_MAX_CANON_ANGLE_VALUE-ms_MIN_CANON_ANGLE_VALUE)/(MaxThrottleValue-MinThrottleValue) *ThrottleValue + 114;
         
         
         HandleAngleMode(m_dbAngleWanted);
-        m_dbAngleDifference = m_dbRequestedAngleValue - m_dbCurrentAngle;
-     
-      //  m_dbCurrentDistance = Robot.vision.getDistance();
         
     }
     
