@@ -17,9 +17,9 @@ public class AutonomousBackAndForth extends CommandGroup {
     public  AutonomousBackAndForth(double dbDistanceMetre, double dbTopSpeed, int nRepetition) {     
         for (int nIndex = 0; nIndex < nRepetition; nIndex++)
         {
-            addSequential(new DriveTrain_MoveTo(dbDistanceMetre,dbTopSpeed));
+            addSequential(new DriveTrain_MoveTo(dbDistanceMetre));
             addSequential(new DriveTrain_Idle(3));
-            addSequential(new DriveTrain_MoveTo(dbDistanceMetre, -dbTopSpeed));
+            addSequential(new DriveTrain_MoveTo(dbDistanceMetre));
             addSequential(new DriveTrain_Idle(3));
         }
     }
