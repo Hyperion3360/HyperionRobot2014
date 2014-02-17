@@ -61,7 +61,7 @@ public class CanonSpinner extends Subsystem {
         catchSpeed = ((Robot.oi.getCoPilotJoystick().getRawAxis(1) + 1) / 2);
         shootSpeed = -((Robot.oi.getCoPilotJoystick().getRawAxis(1) + 1) / 2);
         
-        System.out.println("SpeedAxisValue" + (Robot.oi.getCoPilotJoystick().getRawAxis(1)));
+        //System.out.println("SpeedAxisValue" + (Robot.oi.getCoPilotJoystick().getRawAxis(1)));
     }
     
     public void HandleSpinnerPresetMode(){

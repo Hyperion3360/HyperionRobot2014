@@ -30,13 +30,29 @@ public class  DriveTrain_Move extends Command {
         System.out.println("DriveTrain_Move::Init");
         Robot.driveTrain.initEncoders();
         Robot.driveTrain.initSpeedController();
-        m_distanceWanted = 3;//SmartDashboard.getNumber("Distance du mode autonome");
-        m_speedWanted = 2;//SmartDashboard.getNumber("Vitesse du mode autonome");
+        Robot.driveTrain.enablePID();
+        m_distanceWanted = 6;//SmartDashboard.getNumber("Distance du mode autonome");
+        m_speedWanted = 0.8;//SmartDashboard.getNumber("Vitesse du mode autonome");
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        double speedSent = 0;
+        double dbSaturationPointM = 1;
+        double distanceRemaining = m_distanceWanted - Robot.driveTrain.getDrivedDistance();
+        
+        if (distanceRemaining > dbSaturationPointM)
+        {
+            speedSent = m_speedWanted;
+        }
+        else
+        {
+            speedSent = m_speedWanted * (distanceRemaining / dbSaturationPointM);
+        }
+        
+        System.out.println("Distance remaining = " + distanceRemaining);
         System.out.println("Autonomous set speed = " + m_speedWanted);
-        Robot.driveTrain.driveWithEncoders(m_speedWanted);
+        
+        Robot.driveTrain.driveWithPID(speedSent);
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
@@ -44,12 +60,15 @@ public class  DriveTrain_Move extends Command {
     }
     // Called once after isFinished returns true
     protected void end() {
+        Robot.driveTrain.disablePID();
+        Robot.driveTrain.stopDriving();
         System.out.println("DriveTrain_Move::End");
     }
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        Robot.driveTrain.disablePID();
+        Robot.driveTrain.stopDriving();
         System.out.println("DriveTrain_Move::Int" + m_speedWanted);
-        
     }
 }

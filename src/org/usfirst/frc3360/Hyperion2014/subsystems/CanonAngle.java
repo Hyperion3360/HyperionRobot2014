@@ -76,22 +76,22 @@ public class CanonAngle extends Subsystem {
     
     public void HandleManualMode(){
         m_dbDesiredSpeed = -Robot.oi.getCoPilotJoystick().getRawAxis(4);
-        System.out.println("HandleManualMode: desiredSpeed" + m_dbDesiredSpeed);
+        //System.out.println("HandleManualMode: desiredSpeed" + m_dbDesiredSpeed);
         
         m_dbCurrentAngle = getCurrentAngle();
-        System.out.println("HandleManualMode: currentAngle" + m_dbCurrentAngle);
+        //System.out.println("HandleManualMode: currentAngle" + m_dbCurrentAngle);
         
         m_dbDesiredSpeed = GetSafeSpeed(m_dbDesiredSpeed);
         
-        System.out.println("HandleManualMode: Motor speed" + m_dbDesiredSpeed);
+        //System.out.println("HandleManualMode: Motor speed" + m_dbDesiredSpeed);
         allWheelAngleMotor.set(m_dbDesiredSpeed);
     }
     
     public void HandleAutoMode(){
         // Automatic mode is currently disabled.
-        System.out.println(anglePot.getAverageVoltage() + "potentiometer value");
+        //System.out.println(anglePot.getAverageVoltage() + "potentiometer value");
         
-        System.out.println(Robot.vision.getDistance() + "vison distance");
+        //System.out.println(Robot.vision.getDistance() + "vison distance");
 
         //insert fuction here
         m_dbRequestedAngleValue = 1;
@@ -102,7 +102,7 @@ public class CanonAngle extends Subsystem {
         
         m_dbAngleDifference = m_dbRequestedAngleValue - m_dbCurrentAngle;
      
-        m_dbCurrentDistance = Robot.vision.getDistance();
+      //  m_dbCurrentDistance = Robot.vision.getDistance();
         
        
        
