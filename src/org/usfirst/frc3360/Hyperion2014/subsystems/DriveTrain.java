@@ -108,10 +108,7 @@ public class DriveTrain extends Subsystem {
         // Use these 2 lines to calibrate number of pulses
         //leftWheelsEncoder.setDistancePerPulse(1);
         //rightWheelsEncoder.setDistancePerPulse(1);
-=======
->>>>>>> origin/development-drivetrain
-        
-        
+
         System.out.println("Left" + leftWheelsEncoder.getDistance());
         System.out.println("Right" + rightWheelsEncoder.getDistance());
         SmartDashboard.putNumber("Distance droit", rightWheelsEncoder.getDistance());
@@ -162,13 +159,12 @@ public class DriveTrain extends Subsystem {
 
         allWheelRobotDrive.tankDrive(sentCommandLeft, sentCommandRight);
         
-<<<<<<< HEAD
+
      //   System.out.println("Left" + leftWheelsEncoder.getDistance());
      //   System.out.println("Right" + rightWheelsEncoder.getDistance());
-=======
+
         System.out.println("Left Distance " + leftWheelsEncoder.getDistance());
         System.out.println("Right Distance " + rightWheelsEncoder.getDistance());
->>>>>>> origin/development-drivetrain
         SmartDashboard.putNumber("Distance droit", rightWheelsEncoder.getDistance());
         SmartDashboard.putNumber("Distance gauche", leftWheelsEncoder.getDistance());
     //    System.out.println("Vitesse droite (m par s)" + leftWheelsEncoder.getRate());
@@ -184,16 +180,16 @@ public class DriveTrain extends Subsystem {
     }
     
     //autonomousCommand Software
-    public void initEncoders() {
-        System.out.println("Drive initEncoders");
-        leftWheelsEncoder.reset();
-        rightWheelsEncoder.reset();
+  //  public void initEncoders() {
+  //      System.out.println("Drive initEncoders");
+  //      leftWheelsEncoder.reset();
+  //      rightWheelsEncoder.reset();
         // Use these 2 lines to calibrate number of pulses
-        leftWheelsEncoder.setDistancePerPulse(5/11828.4);
-        rightWheelsEncoder.setDistancePerPulse(5/11575.4);
+   //     leftWheelsEncoder.setDistancePerPulse(5/11828.4);
+    //    rightWheelsEncoder.setDistancePerPulse(5/11575.4);
         
-        leftWheelsEncoder.setPIDSourceParameter(PIDSource.PIDSourceParameter.kRate);
-        rightWheelsEncoder.setPIDSourceParameter(PIDSource.PIDSourceParameter.kRate);
+    //    leftWheelsEncoder.setPIDSourceParameter(PIDSource.PIDSourceParameter.kRate);
+     //   rightWheelsEncoder.setPIDSourceParameter(PIDSource.PIDSourceParameter.kRate);
         
         
         // Use these 2 lines when calibrated
@@ -201,24 +197,24 @@ public class DriveTrain extends Subsystem {
         //rightWheelsEncoder.setDistancePerPulse(0.00082338);
         
         //leftWheelsEncoder.setReverseDirection(true);
-        leftWheelsEncoder.start();
-        rightWheelsEncoder.start();
+     //  leftWheelsEncoder.start();
+     //   rightWheelsEncoder.start();
                
-        leftWheelController = new PIDController(0.1, 0.08, 0, leftWheelsEncoder, leftPidOutput); 
-        rightWheelController = new PIDController(0.1, 0.08, 0, rightWheelsEncoder, rightPidOutput);
+     //   leftWheelController = new PIDController(0.1, 0.08, 0, leftWheelsEncoder, leftPidOutput); 
+     //   rightWheelController = new PIDController(0.1, 0.08, 0, rightWheelsEncoder, rightPidOutput);
         
-        leftWheelController.setInputRange(-m_dbABS_MAX_SPEED_MS, m_dbABS_MAX_SPEED_MS);
-        leftWheelController.setPercentTolerance(15);
-        leftWheelController.setOutputRange(-1, 1);
-        leftWheelController.setSetpoint(0);
-        leftWheelController.setContinuous(false);
+     //   leftWheelController.setInputRange(-m_dbABS_MAX_SPEED_MS, m_dbABS_MAX_SPEED_MS);
+      //  leftWheelController.setPercentTolerance(15);
+     //   leftWheelController.setOutputRange(-1, 1);
+      //  leftWheelController.setSetpoint(0);
+      //  leftWheelController.setContinuous(false);
         
-        rightWheelController.setInputRange(-m_dbABS_MAX_SPEED_MS, m_dbABS_MAX_SPEED_MS);
-        rightWheelController.setPercentTolerance(15);
-        rightWheelController.setOutputRange(-1, 1);
-        rightWheelController.setSetpoint(0);
-        rightWheelController.setContinuous(false);
-    }
+     //   rightWheelController.setInputRange(-m_dbABS_MAX_SPEED_MS, m_dbABS_MAX_SPEED_MS);
+      //  rightWheelController.setPercentTolerance(15);
+      //  rightWheelController.setOutputRange(-1, 1);
+      //  rightWheelController.setSetpoint(0);
+     //   rightWheelController.setContinuous(false);
+  //  }
 
     public void initSpeedController() {
         System.out.println("Drive initSpeedController");

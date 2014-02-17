@@ -23,7 +23,7 @@ public class AutonomousMode extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
         
-        addSequential(new DriveTrain_MoveTo(5, 0.80));
+        addSequential(new DriveTrain_MoveTo(5));
         addParallel(new CanonAngle_HandleAutoMode());
         addParallel(new CanonSpinner_PrepareTopGoal());
         addSequential(new SystemWait(2));

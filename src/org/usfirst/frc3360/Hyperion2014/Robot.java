@@ -99,13 +99,11 @@ public class Robot extends IterativeRobot {
     }
     
     public void disabledInit() {
-<<<<<<< HEAD
+
        
-        vision.stopVision();
-=======
         System.out.println("Robot.disabledInit");
         //vision.stopVision();
->>>>>>> origin/development-drivetrain
+
         canonAngle.AngleStop();
         canonAngle.ResetSecurity();
     }
