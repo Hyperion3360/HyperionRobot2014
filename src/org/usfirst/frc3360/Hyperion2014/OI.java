@@ -110,8 +110,8 @@ public class OI {
         Button_CanonSpinner_CatchSpeed.whileHeld(new CanonSpinner_ReceivePass());
         
         Button_CanonSpinner_SetManualMode = new DigitalIOButton(8);
-        Button_CanonSpinner_SetManualMode.whenInactive(new CanonSpinner_HandleManualMode());
-        Button_CanonSpinner_SetManualMode.whileHeld(new CanonSpinner_HandlePresetMode());
+        Button_CanonSpinner_SetManualMode.whenInactive(new CanonSpinner_HandlePresetMode());
+        Button_CanonSpinner_SetManualMode.whileHeld(new CanonSpinner_HandleManualMode());
         
         Button_CanonAngle_SetManualMode = new DigitalIOButton(6);
         Button_CanonAngle_SetManualMode.whileHeld(new CanonAngle_HandleAutoMode());
