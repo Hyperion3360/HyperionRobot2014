@@ -9,9 +9,11 @@
 // it from being updated in the future.
 package org.usfirst.frc3360.Hyperion2014.subsystems;
 import edu.wpi.first.wpilibj.AnalogChannel;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SpeedController;
 import org.usfirst.frc3360.Hyperion2014.RobotMap;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc3360.Hyperion2014.Robot;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_HandlePresetMode;
 /**
@@ -56,19 +58,20 @@ public class CanonSpinner extends Subsystem {
     
     public void HandleSpinnerManualMode(){
         
-        //the axis 1 is the potentiometer on the driver station that adjusts
+        //the axis 3 is the potentiometer on the driver station that adjusts
         //the spin when the switch is in manual mode
-        m_dbCatchSpeed = ((Robot.oi.getCoPilotJoystick().getRawAxis(1) + 1) / 2);
-        m_dbShootSpeed = -((Robot.oi.getCoPilotJoystick().getRawAxis(1) + 1) / 2);
+        m_dbCatchSpeed = (DriverStation.getInstance().getAnalogIn(3));
+        m_dbShootSpeed = -(DriverStation.getInstance().getAnalogIn(3));
         
-        System.out.println("SpeedAxisValue" + (Robot.oi.getCoPilotJoystick().getRawAxis(1)));
+        System.out.println("SpeedAxisValue" + (DriverStation.getInstance().getAnalogIn(3)));
     }
     
     public void HandleSpinnerPresetMode(){
         
-        // the axis 3 is a screw potentiometer directly on the driver station to adjust the catch speed
+        double CatchSpeed = DriverStation.getInstance().getAnalogIn(2);
+        // the axis 2 is a screw potentiometer directly on the driver station to adjust the catch speed
        // System.out.println("axis 3 (catch speed)" + Robot.oi.getCoPilotJoystick().getRawAxis(3));
-        m_dbCatchSpeed = 0.6;
+        m_dbCatchSpeed = CatchSpeed;
         m_dbShootSpeed = -1;
     }
             

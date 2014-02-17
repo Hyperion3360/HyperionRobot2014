@@ -10,6 +10,7 @@
 package org.usfirst.frc3360.Hyperion2014.subsystems;
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import org.usfirst.frc3360.Hyperion2014.RobotMap;
@@ -35,8 +36,14 @@ public class CanonAngle extends PIDSubsystem {
     
     // WARNING: The logic will only work if ms_MAX_CANON_ANGLE_VALUE > ms_MIN_CANON_ANGLE_VALUE;
     final double ms_MAX_CANON_ANGLE_VALUE = 90;
-    final double ms_MIN_CANON_ANGLE_VALUE = 5;
-    final double ms_MAX_ANGLE_TOLERANCE = 0.5;
+    final double ms_MIN_CANON_ANGLE_VALUE = 8;
+    final double ms_MAX_ANGLE_TOLERANCE = 0.025;
+    
+    final double MaxThrottleValue = 0.55;
+    final double MinThrottleValue = 2.43;
+    
+    final double AngleAt90 = 4.20;
+    final double AngleAt0 = 0.35;
     
     double m_dbDesiredSpeed = 0;
     double m_dbAngleDifference = 0;
@@ -58,11 +65,11 @@ public class CanonAngle extends PIDSubsystem {
     boolean m_bLoweringStop = false;
     
     public CanonAngle() {
-        super("CanonAngle", 0.03, 0, 0);
+        super("CanonAngle", 0.07, .0001, 0);
         getPIDController().setContinuous(false);
         getPIDController().setInputRange(ms_MIN_CANON_ANGLE_VALUE, ms_MAX_CANON_ANGLE_VALUE);
         getPIDController().setOutputRange(-1, 1);
-        getPIDController().setPercentTolerance(15);
+        getPIDController().setPercentTolerance(5);
     }
     
     // Put methods for controlling this subsystem
@@ -102,29 +109,25 @@ public class CanonAngle extends PIDSubsystem {
     
     public void HandleAngleMode(double dbAngleDegree)
     {
+        System.out.println("HandleAngleMode: " + dbAngleDegree);
         setSetpoint(dbAngleDegree);
     }
     
     public void HandleVelocityMode(){
+        double ThrottleValue = DriverStation.getInstance().getAnalogIn(1);
         
-        System.out.println(FrontSonar.getAverageVoltage() + "Ultrasonic Voltage");
-        m_dbCurrentDistance = FrontSonar.getAverageVoltage();
-        SmartDashboard.putNumber("current Angle", m_dbCurrentAngle);
-        m_dbDesiredSpeed = -Robot.oi.getCoPilotJoystick().getRawAxis(4);
-        System.out.println("HandleManualMode: desiredSpeed" + m_dbDesiredSpeed);
+        System.out.println("ThrottleValue:" + ThrottleValue);
         
-        m_dbCurrentAngle = getCurrentAngle();
-        System.out.println("HandleManualMode: currentAngle" + m_dbCurrentAngle);
-        SmartDashboard.putNumber("current Angle", m_dbCurrentAngle);
+        m_dbAngleWanted = (ms_MAX_CANON_ANGLE_VALUE-ms_MIN_CANON_ANGLE_VALUE)/(MaxThrottleValue-MinThrottleValue) *ThrottleValue + 114;
         
-        m_dbDesiredSpeed = GetSafeSpeed(m_dbDesiredSpeed);
         
-        System.out.println("HandleManualMode: Motor speed" + m_dbDesiredSpeed);
-        allWheelAngleMotor.set(m_dbDesiredSpeed);
+        HandleAngleMode(m_dbAngleWanted);
+        
     }
     
     private double GetSafeSpeed(double speed)
     {
+        m_dbCurrentAngle = getCurrentAngle();
         if (isElevatingSpeed(speed))
         {
             if (!m_bElevationStop)
@@ -152,7 +155,7 @@ public class CanonAngle extends PIDSubsystem {
                 speed = 0;
             }
         }
-        else if (isLoweringSpeed(m_dbDesiredSpeed))
+        else if (isLoweringSpeed(speed))
         {
             if (!m_bLoweringStop)
             {
@@ -179,7 +182,9 @@ public class CanonAngle extends PIDSubsystem {
                 speed = 0;
             }
         }
-        
+        else{
+            speed = 0.05;
+        }
         return speed;
     }
     
@@ -195,8 +200,8 @@ public class CanonAngle extends PIDSubsystem {
     
     private double getCurrentAngle()
     {
-        final double dbVoltageAt90Degree = 2.99;
-        final double dbVoltageAt0Degree = 0.47;
+        final double dbVoltageAt90Degree = AngleAt90;
+        final double dbVoltageAt0Degree = AngleAt0;
         final double dbVoltageToAngleRatio = 90/(dbVoltageAt90Degree-dbVoltageAt0Degree);
         
         double dbCurrentAnglePotValue = anglePot.getAverageVoltage();
@@ -230,10 +235,11 @@ public class CanonAngle extends PIDSubsystem {
     }
     
     public double getPerfectAngle(){
-        m_dbCurrentDistance = Robot.vision.getCameraInfoDistance();
+        
+        m_dbCurrentDistance = FrontSonar.getAverageVoltage();
         
         //formule a modifier****
-        m_dbAngleWanted = 20.111*(m_dbCurrentDistance * m_dbCurrentDistance)-60.2156*m_dbCurrentDistance+112.574;
+        m_dbAngleWanted = 19.516*(m_dbCurrentDistance * m_dbCurrentDistance)-54.2298*m_dbCurrentDistance+100.2;
         //formule a modifier****
         
         
@@ -243,27 +249,10 @@ public class CanonAngle extends PIDSubsystem {
     }
     
     public void setAngleAuto(){
+        
         m_dbAngleWanted = getPerfectAngle();
         
-        m_dbCurrentAngle = getCurrentAngle();
-        
-        m_dbAngleDifference = m_dbAngleWanted - m_dbCurrentAngle;
-        
-        m_dbDesiredSpeed = m_dbAngleDifference;
-        
-        if(m_dbAngleDifference > -0.5 && m_dbAngleDifference < 0.5)
-        {
-            m_bIsReadyToShoot = true;
-        }
-        else{
-            m_bIsReadyToShoot = false;
-        }
-        
-        SmartDashboard.putBoolean("Ready to shoot", m_bIsReadyToShoot);
-        
-        m_dbDesiredSpeed = GetSafeSpeed(m_dbDesiredSpeed);
-        
-        allWheelAngleMotor.set(m_dbDesiredSpeed);
+        HandleAngleMode(m_dbAngleWanted);
         
     }
 }
