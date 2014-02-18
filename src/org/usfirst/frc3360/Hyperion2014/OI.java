@@ -9,9 +9,20 @@
 // it from being updated in the future.
 package org.usfirst.frc3360.Hyperion2014;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc3360.Hyperion2014.commands.AutonomousBackAndForth;
+import org.usfirst.frc3360.Hyperion2014.commands.CanonAngle_HandleAutoMode;
+import org.usfirst.frc3360.Hyperion2014.commands.CanonAngle_HandleManualMode;
+import org.usfirst.frc3360.Hyperion2014.commands.CanonAngle_ResetSecurity;
+import org.usfirst.frc3360.Hyperion2014.commands.CanonAngle_SetShooterAngle;
+import org.usfirst.frc3360.Hyperion2014.commands.CanonShooter_Shoot;
+import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_HandleManualMode;
+import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_HandlePresetMode;
+import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_PrepareTopGoal;
+import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_ReceivePass;
+import org.usfirst.frc3360.Hyperion2014.commands.Canon_CopilotGrab;
 import org.usfirst.frc3360.Hyperion2014.commands.DriveTrain_MoveTo;
 
 /**
@@ -40,6 +51,10 @@ public class OI {
         Button_DriveTrain_MoveTo = new JoystickButton(driverRightJoystick, 9);
         Button_DriveTrain_MoveTo.whenPressed(new DriveTrain_MoveTo(8));
 
+        Button_Canon_CopilotGrab = new JoystickButton(driverLeftJoystick, 1);
+        Button_Canon_CopilotGrab.whileHeld(new Canon_CopilotGrab());
+        Button_Canon_CopilotGrab.whenInactive(new CanonAngle_HandleManualMode());
+
         Button_CanonShooter_Shoot = new DigitalIOButton(1);
         Button_CanonShooter_Shoot.whenPressed(new CanonShooter_Shoot());
 
@@ -50,8 +65,8 @@ public class OI {
         Button_CanonSpinner_CatchSpeed.whileHeld(new CanonSpinner_ReceivePass());
         
         Button_CanonSpinner_SetManualMode = new DigitalIOButton(8);
-        Button_CanonSpinner_SetManualMode.whenInactive(new CanonSpinner_HandleManualMode());
-        Button_CanonSpinner_SetManualMode.whileHeld(new CanonSpinner_HandlePresetMode());
+        Button_CanonSpinner_SetManualMode.whenInactive(new CanonSpinner_HandlePresetMode());
+        Button_CanonSpinner_SetManualMode.whileHeld(new CanonSpinner_HandleManualMode());
         
         Button_CanonAngle_SetManualMode = new DigitalIOButton(6);
         Button_CanonAngle_SetManualMode.whileHeld(new CanonAngle_HandleAutoMode());
@@ -61,10 +76,8 @@ public class OI {
     public Joystick getDriverLeftJoystick() {
         return driverLeftJoystick;
     }
+
     public Joystick getDriverRightJoystick() {
         return driverRightJoystick;
-    }
-    public Joystick getCoPilotJoystick() {
-        return coPilotJoystick;
     }
 }

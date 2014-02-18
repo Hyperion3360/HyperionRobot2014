@@ -21,6 +21,8 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDSource.PIDSourceParameter;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Relay;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -34,16 +36,24 @@ public class RobotMap {
     public static DigitalInput canonAngleUpperAngleLimitSwitch;
     public static DigitalInput canonAngleLowerAngleLimitSwitch;
     public static SpeedController canonSpinnerAllWheelSpinnerMotor;
-    public static Servo canonSpinnerSafetyLeftSafetyServo;
-    public static Servo canonSpinnerSafetyRightSafetyServo;
     public static DoubleSolenoid canonShooterShooterSolenoid;
     public static SpeedController driveTrainAllWheelRightMotor;
     public static SpeedController driveTrainAllWheelLeftMotor;
     public static RobotDrive driveTrainAllWheelRobotDrive;
     public static Gyro driveTrainRobotFrameGyro;
     public static AnalogChannel visionFrontSonar;
+    public static Compressor m_compressor;
+    public static Relay ColorLedsRelay;
+    public static Relay FlashingLedsRelay;
 
     public static void init() {
+        
+        ColorLedsRelay = new Relay(3);
+        
+        FlashingLedsRelay = new Relay(2);
+        
+        m_compressor = new Compressor(7, 1);
+        
         canonAngleAllWheelAngleMotor = new Talon(1, 4);
 	LiveWindow.addActuator("CanonAngle", "AllWheelAngleMotor", (Talon) canonAngleAllWheelAngleMotor);
         
@@ -58,13 +68,7 @@ public class RobotMap {
         
         canonSpinnerAllWheelSpinnerMotor = new Talon(1, 3);
 	LiveWindow.addActuator("CanonSpinner", "AllWheelSpinnerMotor", (Talon) canonSpinnerAllWheelSpinnerMotor);
-        
-        canonSpinnerSafetyLeftSafetyServo = new Servo(1, 5);
-	LiveWindow.addActuator("CanonSpinnerSafety", "LeftSafetyServo", canonSpinnerSafetyLeftSafetyServo);
-        
-        canonSpinnerSafetyRightSafetyServo = new Servo(1, 6);
-	LiveWindow.addActuator("CanonSpinnerSafety", "RightSafetyServo", canonSpinnerSafetyRightSafetyServo);
-        
+     
         canonShooterShooterSolenoid = new DoubleSolenoid(1, 1, 2);
 	LiveWindow.addActuator("CanonShooter", "ShooterSolenoid", canonShooterShooterSolenoid);
         

@@ -35,14 +35,14 @@ public class CanonAngle extends PIDSubsystem {
     //the maxAngle randomly occured to be PI  - Antoine
     
     // WARNING: The logic will only work if ms_MAX_CANON_ANGLE_VALUE > ms_MIN_CANON_ANGLE_VALUE;
-    final double ms_MAX_CANON_ANGLE_VALUE = 90;
-    final double ms_MIN_CANON_ANGLE_VALUE = 8;
+    public final static double ms_MAX_CANON_ANGLE_VALUE = 90;
+    public final static double ms_MIN_CANON_ANGLE_VALUE = 8;
     final double ms_MAX_ANGLE_TOLERANCE = 0.025;
     
     final double MaxThrottleValue = 0.55;
     final double MinThrottleValue = 2.43;
     
-    final double AngleAt90 = 4.20;
+    final double AngleAt90 = 4.50;
     final double AngleAt0 = 0.35;
     
     double m_dbDesiredSpeed = 0;
@@ -114,6 +114,9 @@ public class CanonAngle extends PIDSubsystem {
     }
     
     public void HandleVelocityMode(){
+        
+        SmartDashboard.putNumber("Ultrasonic Voltage", FrontSonar.getAverageVoltage());
+        
         double ThrottleValue = DriverStation.getInstance().getAnalogIn(1);
         
         System.out.println("ThrottleValue:" + ThrottleValue);
