@@ -22,13 +22,6 @@ public class AutonomousMode extends CommandGroup {
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-        
-        addSequential(new DriveTrain_MoveTo(5, 0.80));
-        addParallel(new CanonAngle_HandleAutoMode());
-        addParallel(new CanonSpinner_PrepareTopGoal());
-        addSequential(new SystemWait(2));
-        addSequential(new CanonShooter_Shoot());
-        
 
         // To run multiple commands at the same time,
         // use addParallel()

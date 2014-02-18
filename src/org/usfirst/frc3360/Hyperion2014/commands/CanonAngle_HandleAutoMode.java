@@ -24,16 +24,11 @@ public class  CanonAngle_HandleAutoMode extends Command {
     }
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.canonAngle.AngleStop();
-        Robot.canonAngle.EnableAngleMode();
-        Robot.canonAngle.ResetSecurity();
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
      //   System.out.println("angle auto 1");
-
-        Robot.canonAngle.setAngleAuto();
-        
+        Robot.canonAngle.HandleManualMode();
      //   System.out.println("angle auto 2");
     }
     // Make this return true when this Command no longer needs to run execute()
@@ -51,6 +46,7 @@ public class  CanonAngle_HandleAutoMode extends Command {
     }
     
     private void CommandExit() {
-        Robot.canonAngle.DisableAngleMode();
+        Robot.canonAngle.AngleStop();
+        Robot.canonAngle.ResetSecurity();
     }
 }

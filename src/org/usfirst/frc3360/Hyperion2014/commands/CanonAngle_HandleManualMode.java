@@ -12,7 +12,9 @@ import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc3360.Hyperion2014.Robot;
-
+/**
+ *
+ */
 public class  CanonAngle_HandleManualMode extends Command {
     public CanonAngle_HandleManualMode() {
         // Use requires() here to declare subsystem dependencies
@@ -24,17 +26,12 @@ public class  CanonAngle_HandleManualMode extends Command {
     }
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.canonAngle.AngleStop();
-        Robot.canonAngle.ResetSecurity();
-        Robot.canonAngle.EnableAngleMode();
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        System.out.println("angle manual 1");
-        
-        Robot.canonAngle.HandleVelocityMode();
-        
-        System.out.println("angle manual 2");
+    //    System.out.println("angle manual 1");
+        Robot.canonAngle.HandleManualMode();
+     //   System.out.println("angle manual 2");
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
@@ -42,17 +39,16 @@ public class  CanonAngle_HandleManualMode extends Command {
     }
     // Called once after isFinished returns true
     protected void end() {
-        
         CommandExit();
     }
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        
         CommandExit();
     }
     
     private void CommandExit() {
-        Robot.canonAngle.DisableAngleMode();
+        Robot.canonAngle.AngleStop();
+        Robot.canonAngle.ResetSecurity();
     }
 }
