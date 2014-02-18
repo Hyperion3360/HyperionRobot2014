@@ -29,9 +29,9 @@ public class  CanonSpinner_ReceivePass extends Command {
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-     //   System.out.println("catchspeed 1");
+        System.out.println("catchspeed 1");
         Robot.canonSpinner.PrepareCatchSpin();
-      //  System.out.println("catchspeed 2");
+        System.out.println("catchspeed 2");
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

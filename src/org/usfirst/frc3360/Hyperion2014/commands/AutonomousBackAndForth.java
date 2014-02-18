@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutonomousBackAndForth extends CommandGroup {
     
-    public  AutonomousBackAndForth(double dbDistanceMetre, double dbTopSpeed, int nRepetition) {     
+    public  AutonomousBackAndForth(double dbDistanceMetre, int nRepetition) {     
         for (int nIndex = 0; nIndex < nRepetition; nIndex++)
         {
             addSequential(new DriveTrain_MoveTo(dbDistanceMetre));
