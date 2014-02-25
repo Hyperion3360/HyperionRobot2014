@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc3360.Hyperion2014.commands.AutonomousBackAndForth;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonAngle_HandleAutoMode;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonAngle_HandleManualMode;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonAngle_ResetSecurity;
@@ -23,7 +22,9 @@ import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_HandlePresetMode;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_PrepareTopGoal;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_ReceivePass;
 import org.usfirst.frc3360.Hyperion2014.commands.Canon_CopilotGrab;
+import org.usfirst.frc3360.Hyperion2014.commands.Canon_ShootTopGoal;
 import org.usfirst.frc3360.Hyperion2014.commands.DriveTrain_MoveTo;
+import org.usfirst.frc3360.Hyperion2014.commands.Vision_GetCameraDistance;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -33,6 +34,7 @@ public class OI {
     public Joystick driverLeftJoystick;
     public Joystick driverRightJoystick;
 
+    public JoystickButton Button_Canon_PilotShootAuto;
     public JoystickButton Button_DriveTrain_MoveTo;
 
     public DigitalIOButton Button_CanonShooter_Shoot;
@@ -43,13 +45,24 @@ public class OI {
 
     public DigitalIOButton Button_CanonAngle_SetManualMode;
     public DigitalIOButton Button_CanonAngle_SetAutoAngle;
+    
+    public JoystickButton Button_Canon_CopilotGrab;
+    public JoystickButton Button_VisionPrintDistance;
 
     public OI() {
         driverRightJoystick = new Joystick(2);
         driverLeftJoystick = new Joystick(1);
+        
+        Button_VisionPrintDistance = new JoystickButton(driverRightJoystick, 8);
+        Button_VisionPrintDistance.whenPressed(new Vision_GetCameraDistance());
+        
+        
+        Button_Canon_PilotShootAuto = new JoystickButton(driverRightJoystick, 1);
+        Button_Canon_PilotShootAuto.whileHeld(new Canon_ShootTopGoal());
+        Button_Canon_PilotShootAuto.whenInactive(new CanonAngle_HandleManualMode());
 
         Button_DriveTrain_MoveTo = new JoystickButton(driverRightJoystick, 9);
-        Button_DriveTrain_MoveTo.whenPressed(new DriveTrain_MoveTo(8));
+        Button_DriveTrain_MoveTo.whenPressed(new DriveTrain_MoveTo(2));
 
         Button_Canon_CopilotGrab = new JoystickButton(driverLeftJoystick, 1);
         Button_Canon_CopilotGrab.whileHeld(new Canon_CopilotGrab());

@@ -37,6 +37,10 @@ public class LedsSetter extends Subsystem {
         double flashTimeMs = 1;
         try {
             flashTimeMs = DriverStation.getInstance().getEnhancedIO().getAnalogIn(8) * 1000;
+            
+            if(flashTimeMs > 2500){
+                flashTimeMs = 10000000;
+            }
         } catch (DriverStationEnhancedIO.EnhancedIOException ex) {
             ex.printStackTrace();
         }
@@ -57,7 +61,12 @@ public class LedsSetter extends Subsystem {
     
     public void SetBumpersColor(){
         
-        double ColorValue = DriverStation.getInstance().getAnalogIn(6);
+        double ColorValue = 0;
+        try {
+            ColorValue = DriverStation.getInstance().getEnhancedIO().getAnalogIn(6);
+        } catch (DriverStationEnhancedIO.EnhancedIOException ex) {
+            ex.printStackTrace();
+        }
         
         if(ColorValue > 1.5){
             

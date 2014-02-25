@@ -11,6 +11,7 @@
 
 package org.usfirst.frc3360.Hyperion2014.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc3360.Hyperion2014.Robot;
 
 /**
  *
@@ -23,6 +24,13 @@ public class Canon_ShootTopGoal extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
 
+        addParallel(new CanonAngle_SetShooterAngle(Robot.canonAngle.getPerfectAngle()));
+        addParallel(new CanonSpinner_PrepareTopGoal());
+        addSequential(new SystemWait(2));
+        addSequential(new CanonShooter_Shoot());
+        addSequential(new CanonSpinner_Brake());
+        
+        
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());

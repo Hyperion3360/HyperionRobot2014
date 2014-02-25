@@ -32,6 +32,7 @@ public class Robot extends IterativeRobot {
     public static CanonShooter canonShooter;
     public static DriveTrain driveTrain;
     public static LedsSetter LedsSetter;
+    public static Vision vision;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -39,6 +40,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 	RobotMap.init();
+        vision = new Vision();
         canonAngle = new CanonAngle();
         canonSpinner = new CanonSpinner();
         canonShooter = new CanonShooter();
