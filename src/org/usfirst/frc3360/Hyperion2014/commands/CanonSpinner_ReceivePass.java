@@ -35,7 +35,7 @@ public class  CanonSpinner_ReceivePass extends Command {
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if(!m_bIsInit {
+        if(!m_bIsInit) {
             Robot.canonSpinner.InitCatchSpeed();
             
             if(isTimedOut()){
