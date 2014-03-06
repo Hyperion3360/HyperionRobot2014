@@ -55,7 +55,14 @@ public class Robot extends IterativeRobot {
         oi = new OI();
 	
         // instantiate the command used for the autonomous period
+        double axisPos = oi.getDriverLeftJoystick().getRawAxis(3);
+        if(axisPos > .5){        
         autonomousCommand = new Autonomous_2balls();
+        }else if(axisPos < -.5){
+        autonomousCommand = new AutonomousMode();
+        }else{
+        autonomousCommand = null;
+        }
         
         Compressor m_compressor = RobotMap.m_compressor;
         m_compressor.start();
