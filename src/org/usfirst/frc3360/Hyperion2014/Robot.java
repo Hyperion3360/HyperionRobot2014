@@ -68,7 +68,8 @@ public class Robot extends IterativeRobot {
         
         Compressor m_compressor = RobotMap.m_compressor;
         m_compressor.start();
-
+        
+        RobotMap.visionFrontSonarSolenoidRelay.set(true);
     }
     public void autonomousInit() {
         // schedule the autonomous command (example)
