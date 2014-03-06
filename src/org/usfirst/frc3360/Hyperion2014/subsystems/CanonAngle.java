@@ -266,5 +266,7 @@ public class CanonAngle extends PIDSubsystem {
         
         HandleAngleMode(m_dbAngleWanted);
         
+        System.out.println("setAngleAuto WARNING");
+        
     }
 }

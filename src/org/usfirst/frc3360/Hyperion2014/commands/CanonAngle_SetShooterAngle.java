@@ -29,6 +29,10 @@ public class CanonAngle_SetShooterAngle extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        System.out.println("Start set Shooter Angle 9999999999999999");
+        System.out.println("Start set Shooter Angle 9999999999999999");
+        System.out.println("Start set Shooter Angle 9999999999999999");
+        System.out.println("Start set Shooter Angle 9999999999999999");
         Robot.canonAngle.AngleStop();
         Robot.canonAngle.ResetSecurity();
         Robot.canonAngle.EnableAngleMode();
