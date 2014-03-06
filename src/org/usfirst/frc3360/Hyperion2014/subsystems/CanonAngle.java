@@ -58,6 +58,10 @@ public class CanonAngle extends PIDSubsystem {
     
     double m_dbAngleWanted;
     
+    double m_dbA = 0.37535;
+    double m_dbB = -7.87547;
+    double m_dbC = 92.3799*10;
+    
     boolean m_bIsGoingDown = false;
     boolean m_bIsGoingUp = false;
     boolean m_bIsReadyToShoot = false;
@@ -267,7 +271,9 @@ public class CanonAngle extends PIDSubsystem {
             Robot.LedsSetter.RemoveErrorBoolean();
             m_dbCurrentDistanceFeet = m_dbCurrentDistanceFeet/nbDonnesTrue;
             //formule a modifier****
-            m_dbAngleWanted = 0.1284*(m_dbCurrentDistanceFeet * m_dbCurrentDistanceFeet)-4.6646*m_dbCurrentDistanceFeet+95.945;
+            m_dbAngleWanted = (0.37535)*(m_dbCurrentDistanceFeet * m_dbCurrentDistanceFeet) +
+                              (-7.87547)*(m_dbCurrentDistanceFeet)+
+                              (9.23799*10);
             //formule a modifier****
         }
         else if(Robot.robotInstance.isAutonomous()){
