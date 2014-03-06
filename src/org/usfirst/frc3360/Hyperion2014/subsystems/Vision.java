@@ -189,6 +189,7 @@ public class Vision extends Subsystem
                         }
                     } else {                       
                         System.out.println("N'a pas pu rien trouver.");
+                        distance = 0;
                     }
 
                     /**

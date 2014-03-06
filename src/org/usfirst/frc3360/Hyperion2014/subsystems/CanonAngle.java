@@ -197,7 +197,7 @@ public class CanonAngle extends PIDSubsystem {
         return !lowerAngleLimitSwitch.get();
     }
     
-    private double getCurrentAngle()
+    public double getCurrentAngle()
     {
         final double dbVoltageAt90Degree = AngleAt90;
         final double dbVoltageAt0Degree = AngleAt0;
@@ -234,9 +234,22 @@ public class CanonAngle extends PIDSubsystem {
     }
     
     public double getPerfectAngle(){
+        int nbDonnesTrue = 0;
+        int nbDonnesFail = 0;
+        for(int i = 0 ; i < 3 ; i++){
+            double distanceMesured = Robot.vision.GetDistanceCamera();
+            if (distanceMesured == 0){
+                nbDonnesFail ++;
+            }
+            else{
+                nbDonnesTrue ++;
+            }
+
+            m_dbCurrentDistance += distanceMesured;
+
+        }
         
-        m_dbCurrentDistance = Robot.vision.GetDistanceCamera();
-        
+        m_dbCurrentDistance = m_dbCurrentDistance/nbDonnesTrue;
         //formule a modifier****
         m_dbAngleWanted = 0.1284*(m_dbCurrentDistance * m_dbCurrentDistance)-4.6646*m_dbCurrentDistance+95.945;
         //formule a modifier****
