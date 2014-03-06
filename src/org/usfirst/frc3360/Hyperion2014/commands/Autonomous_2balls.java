@@ -24,6 +24,7 @@ public class Autonomous_2balls extends CommandGroup{
         addSequential(new SystemWait(0.8));
         // Shoot the second ball    
         addSequential(new Canon_ShootTopGoal());
+        addSequential(new DriveTrain_MoveTo(1.5));
         
     }
 
