@@ -25,6 +25,8 @@ public class LedsSetter extends Subsystem {
     Relay ColorLedsRelay = RobotMap.ColorLedsRelay;
     Relay FlashingLedsRelay = RobotMap.FlashingLedsRelay;
     double LastFlashTimeMs = System.currentTimeMillis();
+    boolean m_bIsError;
+    boolean m_FlashState = false;
 
    
     public void initDefaultCommand() {
@@ -47,17 +49,41 @@ public class LedsSetter extends Subsystem {
         
         System.out.println("FlashTime" + flashTimeMs);
         
-        if (System.currentTimeMillis() - LastFlashTimeMs > flashTimeMs){
-            
-            FlashingLedsRelay.set(Relay.Value.kOff);
-            Timer.delay(0.1);
-            FlashingLedsRelay.set(Relay.Value.kForward);
+        if ((System.currentTimeMillis() - LastFlashTimeMs) > flashTimeMs){
+            // Initiate FLASH;
+            m_FlashState = false;
             
             LastFlashTimeMs = System.currentTimeMillis();
         }
-      
+        else if ((System.currentTimeMillis() - LastFlashTimeMs) > (0.1 * flashTimeMs))
+        {
+            m_FlashState = true;
+        }
+        
+        if (m_FlashState)
+        {
+            if (!m_bIsError)
+            {
+                FlashingLedsRelay.set(Relay.Value.kForward);
+            }
+            else
+            {
+                FlashingLedsRelay.set(Relay.Value.kReverse);
+            }
+        }
+        else
+        {
+            FlashingLedsRelay.set(Relay.Value.kOff);           
+        }
+    }
+    public void ErrorBoolean(){
+        m_bIsError = true;
     }
     
+    public void RemoveErrorBoolean()
+    {
+        m_bIsError = false;        
+    }
     
     public void SetBumpersColor(){
         

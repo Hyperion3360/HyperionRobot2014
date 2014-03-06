@@ -249,10 +249,21 @@ public class CanonAngle extends PIDSubsystem {
 
         }
         
-        m_dbCurrentDistance = m_dbCurrentDistance/nbDonnesTrue;
-        //formule a modifier****
-        m_dbAngleWanted = 0.1284*(m_dbCurrentDistance * m_dbCurrentDistance)-4.6646*m_dbCurrentDistance+95.945;
-        //formule a modifier****
+        if(nbDonnesTrue !=0){
+            Robot.LedsSetter.RemoveErrorBoolean();
+            m_dbCurrentDistance = m_dbCurrentDistance/nbDonnesTrue;
+            //formule a modifier****
+            m_dbAngleWanted = 0.1284*(m_dbCurrentDistance * m_dbCurrentDistance)-4.6646*m_dbCurrentDistance+95.945;
+            //formule a modifier****
+        }
+        else if(Robot.robotInstance.isAutonomous()){
+            m_dbAngleWanted = 58;
+            Robot.LedsSetter.RemoveErrorBoolean();
+        }else{
+            Robot.LedsSetter.ErrorBoolean();
+            m_dbAngleWanted = 58;
+        }
+        
         
         
         SmartDashboard.putNumber("Angle Wanted: ", m_dbAngleWanted);
@@ -266,7 +277,6 @@ public class CanonAngle extends PIDSubsystem {
         
         HandleAngleMode(m_dbAngleWanted);
         
-        System.out.println("setAngleAuto WARNING");
         
     }
 }

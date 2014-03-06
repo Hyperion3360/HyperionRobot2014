@@ -33,12 +33,14 @@ public class Robot extends IterativeRobot {
     public static DriveTrain driveTrain;
     public static LedsSetter LedsSetter;
     public static Vision vision;
+    public static Robot robotInstance;
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
+        robotInstance = this;
 	RobotMap.init();
         vision = new Vision();
         canonAngle = new CanonAngle();
@@ -77,7 +79,6 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        
         Robot.LedsSetter.FlashLedsPeriodic();
         
         Robot.LedsSetter.SetBumpersColor();
@@ -118,5 +119,4 @@ public class Robot extends IterativeRobot {
         canonAngle.AngleStop();
         canonAngle.ResetSecurity();
     }
-    
 }
