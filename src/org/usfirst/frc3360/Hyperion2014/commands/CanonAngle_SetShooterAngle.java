@@ -14,10 +14,17 @@ import org.usfirst.frc3360.Hyperion2014.Robot;
  */
 public class CanonAngle_SetShooterAngle extends Command {
     double m_dbAngleDegree = 0;
+    boolean m_bStopAtAngle = false;
     
     public CanonAngle_SetShooterAngle(double dbAngleDegree) {
         requires(Robot.canonAngle);
         m_dbAngleDegree = dbAngleDegree;
+    }
+    
+    public CanonAngle_SetShooterAngle(double dbAngleDegree, boolean bStopAtAngle) {
+        requires(Robot.canonAngle);
+        m_dbAngleDegree = dbAngleDegree;
+        m_bStopAtAngle = bStopAtAngle;
     }
 
     // Called just before this Command runs the first time
@@ -35,7 +42,14 @@ public class CanonAngle_SetShooterAngle extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        boolean bIsFinished = false;
+        if (m_bStopAtAngle && 
+            ((Robot.canonAngle.getCurrentAngle() < m_dbAngleDegree + 1) ||
+             (Robot.canonAngle.getCurrentAngle() > m_dbAngleDegree - 1)))
+        {
+            bIsFinished = true;
+        }
+        return bIsFinished;
     }
     
     // Called once after isFinished returns true

@@ -13,26 +13,15 @@ import org.usfirst.frc3360.Hyperion2014.subsystems.CanonAngle;
  * @author Hyperion3360
  */
 public class Canon_CopilotGrab extends CommandGroup {
-    
+ 
     public Canon_CopilotGrab() {
-        
-        
-        addParallel(new CanonAngle_SetShooterAngle(CanonAngle.ms_MIN_CANON_ANGLE_VALUE));
         addSequential(new CanonSpinner_ReceivePass());
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
-
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+        addParallel(new CanonAngle_SetShooterAngle(CanonAngle.ms_MIN_CANON_ANGLE_VALUE));
+    }
+    
+    public Canon_CopilotGrab(boolean bStopMotorAtEnd,
+                             boolean bCompleteAtAngle) {
+        addParallel(new CanonSpinner_ReceivePass(bStopMotorAtEnd));
+        addSequential(new CanonAngle_SetShooterAngle(CanonAngle.ms_MIN_CANON_ANGLE_VALUE, bCompleteAtAngle));
     }
 }
