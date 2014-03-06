@@ -15,24 +15,37 @@ import org.usfirst.frc3360.Hyperion2014.Robot;
 public class CanonAngle_SetShooterAngle extends Command {
     double m_dbAngleDegree = 0;
     boolean m_bStopAtAngle = false;
+    boolean m_bShootAtPerfectAngle = false;
+    
+    public CanonAngle_SetShooterAngle(boolean bShootAtPerfectAngle) {
+        requires(Robot.canonAngle);
+        m_dbAngleDegree = 0;
+        m_bStopAtAngle = false;
+        m_bShootAtPerfectAngle = bShootAtPerfectAngle;
+    }
     
     public CanonAngle_SetShooterAngle(double dbAngleDegree) {
         requires(Robot.canonAngle);
         m_dbAngleDegree = dbAngleDegree;
+        m_bStopAtAngle = false;
+        m_bShootAtPerfectAngle = false;
     }
     
     public CanonAngle_SetShooterAngle(double dbAngleDegree, boolean bStopAtAngle) {
         requires(Robot.canonAngle);
         m_dbAngleDegree = dbAngleDegree;
         m_bStopAtAngle = bStopAtAngle;
+        m_bShootAtPerfectAngle = false;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        System.out.println("Start set Shooter Angle 9999999999999999");
-        System.out.println("Start set Shooter Angle 9999999999999999");
-        System.out.println("Start set Shooter Angle 9999999999999999");
-        System.out.println("Start set Shooter Angle 9999999999999999");
+        if (m_bShootAtPerfectAngle)
+        {
+            m_dbAngleDegree = Robot.canonAngle.getPerfectAngle();
+        }
+        System.out.println("Start set Shooter Angle = " + m_dbAngleDegree);
+        
         Robot.canonAngle.AngleStop();
         Robot.canonAngle.ResetSecurity();
         Robot.canonAngle.EnableAngleMode();
@@ -48,7 +61,7 @@ public class CanonAngle_SetShooterAngle extends Command {
     protected boolean isFinished() {
         boolean bIsFinished = false;
         if (m_bStopAtAngle && 
-            ((Robot.canonAngle.getCurrentAngle() < m_dbAngleDegree + 1) ||
+            ((Robot.canonAngle.getCurrentAngle() < m_dbAngleDegree + 1) &&
              (Robot.canonAngle.getCurrentAngle() > m_dbAngleDegree - 1)))
         {
             bIsFinished = true;
