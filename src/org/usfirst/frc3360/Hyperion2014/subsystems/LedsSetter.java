@@ -73,7 +73,7 @@ public class LedsSetter extends Subsystem {
         }
         else
         {
-            FlashingLedsRelay.set(Relay.Value.kOff);           
+            FlashingLedsRelay.set(Relay.Value.kOn);           
         }
     }
     public void ErrorBoolean(){
