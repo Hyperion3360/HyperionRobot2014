@@ -58,12 +58,12 @@ public class CanonAngle extends PIDSubsystem {
     
     double m_dbAngleWanted;
     
-    double m_dbA = -0.0001;
-    double m_dbB = 0.0085;
-    double m_dbC = -0.2478;
-    double m_dbD = 3.6609;
-    double m_dbE = -28.018;
-    double m_dbF = 139.73;
+    double m_dbA = -0.0002;
+    double m_dbB = 0.0126;
+    double m_dbC = -0.3406;
+    double m_dbD = 4.6572;
+    double m_dbE = -32.972;
+    double m_dbF = 148.83;
     
     boolean m_bIsGoingDown = false;
     boolean m_bIsGoingUp = false;
