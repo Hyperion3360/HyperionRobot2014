@@ -55,7 +55,7 @@ public class DriveTrain extends PIDSubsystem {
         double dRightJoystick = -Robot.oi.getDriverRightJoystick().getRawAxis(2);
         SmartDashboard.putNumber("Rigth motor speed", dRightJoystick );
 
-        System.out.println("teleop: left=" + dLeftJoystick + ", right=" + dRightJoystick);
+        //System.out.println("teleop: left=" + dLeftJoystick + ", right=" + dRightJoystick);
 
         allWheelRobotDrive.tankDrive(dLeftJoystick , dRightJoystick);
         
@@ -64,16 +64,18 @@ public class DriveTrain extends PIDSubsystem {
     
     public void driveArcade(double linearSpeed, double rotationSpeed)
     {        
+        //System.out.println("driveArcade");
         m_dbLinearSpeed = linearSpeed;
         setSetpoint(rotationSpeed);
     }
     
     public void driveForwardSpeed(double batteryPercent)
     {
+        //System.out.println("driveForwardSpeed");
         SmartDashboard.putNumber("Left motor speed", 0 );
         SmartDashboard.putNumber("Rigth motor speed", 0 );
 
-        System.out.println("Drive train disabled: left=" + 0 + ", right=" + 0);
+        //System.out.println("Drive train disabled: left=" + 0 + ", right=" + 0);
         allWheelRobotDrive.arcadeDrive(batteryPercent , 0);
     }
     
@@ -97,13 +99,13 @@ public class DriveTrain extends PIDSubsystem {
     }
     
     protected double returnPIDInput() {
-        System.out.println("PID Read: Gyro rate = " + robotFrameGyro.getRate());
+        //System.out.println("PID Read: Gyro rate = " + robotFrameGyro.getRate());
         SmartDashboard.putNumber("PID Read: Gyro rate", robotFrameGyro.getRate());
         return robotFrameGyro.getRate();
     }
 
     protected void usePIDOutput(double d) {
-        System.out.println("PID Output: DriveTrain rotation output = " + -d);
+        //System.out.println("PID Output: DriveTrain rotation output = " + -d);
         allWheelRobotDrive.arcadeDrive(m_dbLinearSpeed, -d);
     }
 }

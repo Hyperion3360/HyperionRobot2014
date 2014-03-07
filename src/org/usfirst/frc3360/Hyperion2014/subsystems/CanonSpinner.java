@@ -64,7 +64,7 @@ public class CanonSpinner extends Subsystem {
         m_dbCatchSpeed = (DriverStation.getInstance().getAnalogIn(3));
         m_dbShootSpeed = -(DriverStation.getInstance().getAnalogIn(3));
         
-        System.out.println("SpeedAxisValue" + (DriverStation.getInstance().getAnalogIn(3)));
+        //System.out.println("SpeedAxisValue" + (DriverStation.getInstance().getAnalogIn(3)));
     }
     
     public void HandleSpinnerPresetMode(){

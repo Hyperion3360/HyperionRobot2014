@@ -19,7 +19,7 @@ import org.usfirst.frc3360.Hyperion2014.Robot;
 public class Canon_ShootTopGoal extends CommandGroup {
     
     public  Canon_ShootTopGoal() {
-        System.out.println("new Canon_ShootTopGoal");
+        //System.out.println("new Canon_ShootTopGoal");
         
         addParallel(new CanonAngle_SetShooterAngle(true));
         addParallel(new CanonSpinner_PrepareTopGoal());

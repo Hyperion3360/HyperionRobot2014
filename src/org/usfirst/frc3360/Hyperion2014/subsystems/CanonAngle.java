@@ -111,7 +111,7 @@ public class CanonAngle extends PIDSubsystem {
     
     public void HandleAngleMode(double dbAngleDegree)
     {
-        System.out.println("HandleAngleMode: " + dbAngleDegree);
+        //System.out.println("HandleAngleMode: " + dbAngleDegree);
         setSetpoint(dbAngleDegree);
     }
     
@@ -120,7 +120,7 @@ public class CanonAngle extends PIDSubsystem {
         
         double ThrottleValue = DriverStation.getInstance().getAnalogIn(1);
         
-        System.out.println("ThrottleValue:" + ThrottleValue);
+        //System.out.println("ThrottleValue:" + ThrottleValue);
         
         m_dbAngleWanted = (ms_MAX_CANON_ANGLE_VALUE-ms_MIN_CANON_ANGLE_VALUE)/(MaxThrottleValue-MinThrottleValue) *ThrottleValue + 114;
         
@@ -138,24 +138,24 @@ public class CanonAngle extends PIDSubsystem {
             {
                 if (m_dbCurrentAngle > ms_MAX_CANON_ANGLE_VALUE)
                 {
-                    System.out.println("HandleManualMode: Maximum angle reach based on potentiometer.");
+                    //System.out.println("HandleManualMode: Maximum angle reach based on potentiometer.");
                     speed = 0;
                 }
                 else if (isUpperLimitSwitchPressed())
                 {
-                    System.out.println("HandleManualMode: Maximum angle reach based on limit switch.");
+                    //System.out.println("HandleManualMode: Maximum angle reach based on limit switch.");
                     m_bElevationStop = true;
                     speed = 0;
                 }
                 else if (m_bLoweringStop)
                 {
-                    System.out.println("HandleManualMode: Canceling lowering emergency stop.");
+                    //System.out.println("HandleManualMode: Canceling lowering emergency stop.");
                     m_bLoweringStop = false;
                 }
             }
             else
             {
-                System.out.println("HandleManualMode: Emergency stop for elevation activated");
+                //System.out.println("HandleManualMode: Emergency stop for elevation activated");
                 speed = 0;
             }
         }
@@ -165,24 +165,24 @@ public class CanonAngle extends PIDSubsystem {
             {
                 if (m_dbCurrentAngle < ms_MIN_CANON_ANGLE_VALUE)
                 {
-                    System.out.println("HandleManualMode: Minimum angle reach based on potentiometer.");
+                    //System.out.println("HandleManualMode: Minimum angle reach based on potentiometer.");
                     speed = 0;
                 }
                 else if (isLowerLimitSwitchPressed())
                 {
-                    System.out.println("HandleManualMode: Minimum angle reach based on limit switch.");
+                    //System.out.println("HandleManualMode: Minimum angle reach based on limit switch.");
                     m_bLoweringStop = true;
                     speed = 0;
                 }
                 else if (m_bElevationStop)
                 {
-                    System.out.println("HandleManualMode: Canceling elevation emergency stop.");
+                    //System.out.println("HandleManualMode: Canceling elevation emergency stop.");
                     m_bElevationStop = false;
                 }
             }
             else
             {
-                System.out.println("HandleManualMode: Emergency stop for lowering activated");
+                //System.out.println("HandleManualMode: Emergency stop for lowering activated");
                 speed = 0;
             }
         }
@@ -212,8 +212,8 @@ public class CanonAngle extends PIDSubsystem {
         
         double dbCurrentAngle = dbCurrentAnglePotValue * dbVoltageToAngleRatio;
         // Automatic mode is currently disabled.
-        System.out.println("potentiometer value = " + dbCurrentAnglePotValue);
-        System.out.println("Canon angle = " + dbCurrentAngle);
+        //System.out.println("potentiometer value = " + dbCurrentAnglePotValue);
+        //System.out.println("Canon angle = " + dbCurrentAngle);
         SmartDashboard.putNumber("Canon angle (degree)", dbCurrentAngle);
         return dbCurrentAngle;
     }
@@ -233,8 +233,8 @@ public class CanonAngle extends PIDSubsystem {
     }
 
     protected void usePIDOutput(double d) {
-        System.out.println("PID ANGLE Motor output = " + d);
-        System.out.println("Safe PID output = " + GetSafeSpeed(d));
+        //System.out.println("PID ANGLE Motor output = " + d);
+        //System.out.println("Safe PID output = " + GetSafeSpeed(d));
         allWheelAngleMotor.set(GetSafeSpeed(d));
     }
     

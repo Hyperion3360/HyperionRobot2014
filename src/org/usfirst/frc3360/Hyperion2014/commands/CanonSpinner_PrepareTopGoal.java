@@ -39,7 +39,7 @@ public class  CanonSpinner_PrepareTopGoal extends Command {
     }
     // Called once after isFinished returns true
     protected void end() {
-        System.out.println("stop spin");
+        //System.out.println("stop spin");
         Robot.canonSpinner.StopSpinning();
     }
     // Called when another command which requires one or more of the same

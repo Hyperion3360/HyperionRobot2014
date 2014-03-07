@@ -47,7 +47,7 @@ public class LedsSetter extends Subsystem {
             ex.printStackTrace();
         }
         
-        System.out.println("FlashTime" + flashTimeMs);
+        //System.out.println("FlashTime" + flashTimeMs);
         
         if ((System.currentTimeMillis() - LastFlashTimeMs) > flashTimeMs){
             // Initiate FLASH;
