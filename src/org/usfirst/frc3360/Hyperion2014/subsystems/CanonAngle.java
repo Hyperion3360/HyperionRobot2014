@@ -258,30 +258,8 @@ public class CanonAngle extends PIDSubsystem {
     }
     
     public double getPerfectAngle(){
-        m_dbCurrentDistanceFeet = 0;
-        
-        int nbDonnesTrue = 0;
-        int nbDonnesFail = 0;
-        for(int i = 0 ; i < 1 ; i++){
-            double distanceMesured = Robot.vision.GetDistanceCamera();
-            if (distanceMesured == 0){
-                nbDonnesFail ++;
-            }
-            else{
-                nbDonnesTrue ++;
-            }
-
-            if (!m_bUseSonarForDistance)
-            {
-                m_dbCurrentDistanceFeet += distanceMesured;
-            }
-        }
-        
-        if (m_bUseSonarForDistance)
-        {
-            m_dbCurrentDistanceFeet = GetSonarDistance();
-            System.out.println("Perfect angle using sonar value = " + m_dbCurrentDistanceFeet);
-        }
+        m_dbCurrentDistanceFeet = GetSonarDistance();
+        System.out.println("Perfect angle using sonar value = " + m_dbCurrentDistanceFeet);
         
         //formule a modifier****
         m_dbAngleWanted = m_dbA * com.sun.squawk.util.MathUtils.pow(m_dbCurrentDistanceFeet, 5) +
@@ -295,14 +273,6 @@ public class CanonAngle extends PIDSubsystem {
             m_dbAngleWanted= 0;
         }else if(m_dbAngleWanted > 90){            
             m_dbAngleWanted= 90;
-        }
-        
-        if (nbDonnesTrue == 0){
-            Robot.LedsSetter.ErrorBoolean();
-        }
-        else
-        {
-            Robot.LedsSetter.RemoveErrorBoolean();
         }
         
         System.out.println("Angle wanted = " + m_dbAngleWanted);

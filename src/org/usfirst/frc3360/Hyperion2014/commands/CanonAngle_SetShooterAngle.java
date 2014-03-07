@@ -43,13 +43,6 @@ public class CanonAngle_SetShooterAngle extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        if (m_bShootAtPerfectAngle)
-        {            
-            m_dbAngleDegree = Robot.canonAngle.getPerfectAngle();
-            System.out.println("Start set Shooter Angle with perfet = " + m_dbAngleDegree);
-        }
-        System.out.println("Start set Shooter Angle = " + m_dbAngleDegree);
-        
         Robot.canonAngle.AngleStop();
         Robot.canonAngle.ResetSecurity();
         Robot.canonAngle.EnableAngleMode();
@@ -57,6 +50,12 @@ public class CanonAngle_SetShooterAngle extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        if (m_bShootAtPerfectAngle)
+        {            
+            m_dbAngleDegree = Robot.canonAngle.getPerfectAngle();
+            System.out.println("Start set Shooter Angle with perfet = " + m_dbAngleDegree);
+        }
+        System.out.println("Start set Shooter Angle = " + m_dbAngleDegree);
         
         Robot.canonAngle.HandleAngleMode(m_dbAngleDegree);
     }

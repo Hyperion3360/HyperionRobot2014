@@ -41,6 +41,7 @@ public class OI {
     
     public JoystickButton Button_DriverCanon_PrepareTopGoal;
     public JoystickButton Button_DriverCanon_Shoot;
+    public JoystickButton Button_DriverCanon_ShootSecondary;
 
     public DigitalIOButton Button_CanonShooter_Shoot;
 
@@ -61,16 +62,14 @@ public class OI {
         Button_VisionPrintDistance = new JoystickButton(driverRightJoystick, 8);
         Button_VisionPrintDistance.whenPressed(new Vision_GetCameraDistance());
         
-        Button_DriverCanon_PrepareTopGoal = new JoystickButton(driverLeftJoystick, 6);
+        Button_DriverCanon_PrepareTopGoal = new JoystickButton(driverRightJoystick, 1);
         Button_DriverCanon_PrepareTopGoal.whileHeld(new Canon_PrepareTopGoal());
         Button_DriverCanon_PrepareTopGoal.whenReleased(new Canon_CancelPrepareTopGoal());
         
-        Button_DriverCanon_Shoot = new JoystickButton(driverLeftJoystick, 7);
+        Button_DriverCanon_Shoot = new JoystickButton(driverRightJoystick, 2);
         Button_DriverCanon_Shoot.whenPressed(new CanonShooter_Shoot());
-        
-        Button_Canon_PilotShootAuto = new JoystickButton(driverRightJoystick, 1);
-        Button_Canon_PilotShootAuto.whileHeld(new Canon_ShootTopGoal());
-        Button_Canon_PilotShootAuto.whenInactive(new CanonAngle_HandleManualMode());
+        Button_DriverCanon_ShootSecondary = new JoystickButton(driverRightJoystick, 3);
+        Button_DriverCanon_ShootSecondary.whenPressed(new CanonShooter_Shoot());
 
         Button_DriveTrain_MoveTo = new JoystickButton(driverRightJoystick, 9);
         Button_DriveTrain_MoveTo.whenPressed(new DriveTrain_MoveTo(2));
