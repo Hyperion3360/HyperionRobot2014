@@ -99,8 +99,8 @@ public class Vision extends Subsystem
                     ColorImage image = camera.getImage();     // comment if using stored image
                     //ColorImage image;                           // next 2 lines read image from flash on cRIO
                     //image = new RGBImage();		// get the sample image from the cRIO flash
-                    //BinaryImage thresholdImage = image.thresholdHSV(20, 140, 20, 255, 20, 175);
-                    BinaryImage thresholdImage = image.thresholdHSV(105, 137, 230, 255, 133, 183);   // keep only green objects
+                    BinaryImage thresholdImage = image.thresholdHSV(20, 140, 20, 255, 20, 175);
+                    //BinaryImage thresholdImage = image.thresholdHSV(105, 137, 230, 255, 133, 183);   // keep only green objects
                     //thresholdImage.write("/threshold.bmp");
                     BinaryImage filteredImage = thresholdImage.particleFilter(cc);           // filter out small particles
                     //filteredImage.write("/filteredImage.bmp");

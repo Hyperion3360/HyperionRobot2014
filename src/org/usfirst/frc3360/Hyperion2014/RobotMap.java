@@ -57,9 +57,6 @@ public class RobotMap {
     public static void init() {
 
         m_camera = AxisCamera.getInstance("10.33.60.11");
-        m_camera.writeBrightness(0);
-        m_camera.writeWhiteBalance(AxisCamera.WhiteBalanceT.hold);
-        m_camera.writeExposureControl(AxisCamera.ExposureT.hold);
 
         cc = new CriteriaCollection();
 
