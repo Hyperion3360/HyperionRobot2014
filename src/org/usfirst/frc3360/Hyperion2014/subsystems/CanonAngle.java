@@ -58,9 +58,12 @@ public class CanonAngle extends PIDSubsystem {
     
     double m_dbAngleWanted;
     
-    double m_dbA = 0.150451;
-    double m_dbB = -4.74061;
-    double m_dbC = 85.4700;
+    double m_dbA = -0.0001;
+    double m_dbB = 0.0085;
+    double m_dbC = -0.2478;
+    double m_dbD = 3.6609;
+    double m_dbE = -28.018;
+    double m_dbF = 139.73;
     
     boolean m_bIsGoingDown = false;
     boolean m_bIsGoingUp = false;
@@ -271,20 +274,25 @@ public class CanonAngle extends PIDSubsystem {
             Robot.LedsSetter.RemoveErrorBoolean();
             m_dbCurrentDistanceFeet = m_dbCurrentDistanceFeet/nbDonnesTrue;
             //formule a modifier****
-            m_dbAngleWanted = (0.37535)*(m_dbCurrentDistanceFeet * m_dbCurrentDistanceFeet) +
-                              (-7.87547)*(m_dbCurrentDistanceFeet)+
-                              (9.23799*10);
+            m_dbAngleWanted = m_dbA * com.sun.squawk.util.MathUtils.pow(m_dbCurrentDistanceFeet, 5) +
+                              m_dbB * com.sun.squawk.util.MathUtils.pow(m_dbCurrentDistanceFeet, 4) +
+                              m_dbC * com.sun.squawk.util.MathUtils.pow(m_dbCurrentDistanceFeet, 3) +
+                              m_dbD * com.sun.squawk.util.MathUtils.pow(m_dbCurrentDistanceFeet, 2) +
+                              m_dbE * m_dbCurrentDistanceFeet +
+                              m_dbF;
             //formule a modifier****
             if(m_dbAngleWanted<0){
                 m_dbAngleWanted= 0;
+            }else if(m_dbAngleWanted > 90){            
+                m_dbAngleWanted= 90;
             }
         }
         else if(Robot.robotInstance.isAutonomous()){
-            m_dbAngleWanted = 58;
+            m_dbAngleWanted = 48.6;
             Robot.LedsSetter.RemoveErrorBoolean();
         }else{
             Robot.LedsSetter.ErrorBoolean();
-            m_dbAngleWanted = 58;
+            m_dbAngleWanted = 49.2;
         }
         
         
