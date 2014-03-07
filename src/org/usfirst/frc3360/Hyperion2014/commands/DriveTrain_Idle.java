@@ -23,7 +23,7 @@ public class DriveTrain_Idle extends Command {
     protected void initialize() {
         
         Robot.driveTrain.resetGyro();
-        System.out.println("DTI: TimeToWait=" + m_dbTimeIdleS);
+        //System.out.println("DTI: TimeToWait=" + m_dbTimeIdleS);
         if (m_dbTimeIdleS > 0)
         {
             setTimeout(m_dbTimeIdleS);   
@@ -39,9 +39,11 @@ public class DriveTrain_Idle extends Command {
     }
     // Called once after isFinished returns true
     protected void end() {
+        //System.out.println("DT Idle end");
     }
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        //System.out.println("DT Idle int");
     }
 }

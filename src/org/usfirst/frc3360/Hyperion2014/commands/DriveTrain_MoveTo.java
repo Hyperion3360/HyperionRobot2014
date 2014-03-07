@@ -30,12 +30,12 @@ public class  DriveTrain_MoveTo extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
         Robot.driveTrain.enableFollowAngleMode();
-        System.out.println("MT: Init move to Dist=" + m_dbDistanceM + ", %Voltage=" + m_dbTopSpeedPV + ", Time=" + m_dbTimeToTravelS);
+        //System.out.println("MT: Init move to Dist=" + m_dbDistanceM + ", %Voltage=" + m_dbTopSpeedPV + ", Time=" + m_dbTimeToTravelS);
         setTimeout(m_dbTimeToTravelS);        
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        System.out.println("timeSinceInitialized=" + timeSinceInitialized());
+        //System.out.println("timeSinceInitialized=" + timeSinceInitialized());
         
         double speedSent = 0;
         double dbSaturationPointS = 1;
@@ -50,8 +50,8 @@ public class  DriveTrain_MoveTo extends Command {
             speedSent = m_dbTopSpeedPV * (timeRemainingS / timeRemainingS);
         }
         
-        System.out.println("Distance remaining = " + timeRemainingS);
-        System.out.println("Autonomous set speed = " + speedSent);
+        //System.out.println("Distance remaining = " + timeRemainingS);
+        //System.out.println("Autonomous set speed = " + speedSent);
         
         // Go straight
         Robot.driveTrain.driveArcade(speedSent, 0);
@@ -63,14 +63,14 @@ public class  DriveTrain_MoveTo extends Command {
     // Called once after isFinished returns true
     protected void end() {
         Robot.driveTrain.disableFollowAngle();
-        System.out.println("MT: END");
+        //System.out.println("MT: END");
         Robot.driveTrain.driveForwardSpeed(0);
     }
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
         Robot.driveTrain.disableFollowAngle();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-        System.out.println("MT: INTERRUPT");
+        //System.out.println("MT: INTERRUPT");
         Robot.driveTrain.driveForwardSpeed(0);
     }
 }

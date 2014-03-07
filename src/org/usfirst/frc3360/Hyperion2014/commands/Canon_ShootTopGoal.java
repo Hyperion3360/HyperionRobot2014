@@ -26,5 +26,6 @@ public class Canon_ShootTopGoal extends CommandGroup {
         addSequential(new SystemWait(2));
         addSequential(new CanonShooter_Shoot());
         addSequential(new CanonSpinner_Brake());
+        addSequential(new CanonAngle_SetShooterAngle(45), 0.3);
     }
 }

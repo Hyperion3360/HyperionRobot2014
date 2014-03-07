@@ -19,12 +19,11 @@ public class Autonomous_2balls extends CommandGroup{
         addParallel(new CanonSpinner_PrepareTopGoal());
         addParallel(new CanonAngle_SetShooterAngle(45.6));
         addSequential(new SystemWait(2));
-        addSequential(new CanonShooter_Shoot());
-        
-        addSequential(new SystemWait(4));
+        addParallel(new CanonShooter_Shoot());
+        addSequential(new SystemWait(1));
         
         // Prepare to grab the ball in front.
-        addSequential(new Canon_CopilotGrab(false, true), 2);
+        addSequential(new Canon_CopilotGrab(false, true), 1);
         
         // Move forward to eat the ball and wait a bit
         // to make sure the ball is in.        
@@ -32,7 +31,8 @@ public class Autonomous_2balls extends CommandGroup{
         
         // Shoot the second ball
         addParallel(new DriveTrain_Idle(0));
-        addSequential(new CanonAngle_SetShooterAngle(55), 0.5);
+        // Prepare the able and let the ball the time to enter.
+        addSequential(new CanonAngle_SetShooterAngle(55), 1);
         addSequential(new Canon_ShootTopGoal());
         addSequential(new DriveTrain_MoveTo(1.5));
         
