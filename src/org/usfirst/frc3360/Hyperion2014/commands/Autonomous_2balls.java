@@ -26,11 +26,13 @@ public class Autonomous_2balls extends CommandGroup{
         // to make sure the ball is in.        
         addSequential(new DriveTrain_MoveTo(2.5));
         
-        // Shoot the second ball    
+        // Shoot the second ball
+        addParallel(new DriveTrain_Idle(0));
         addSequential(new CanonAngle_SetShooterAngle(55), 0.5);
         addSequential(new Canon_ShootTopGoal());
         addSequential(new DriveTrain_MoveTo(1.5));
         
+        addSequential(new DriveTrain_Idle(0));
     }
 
    

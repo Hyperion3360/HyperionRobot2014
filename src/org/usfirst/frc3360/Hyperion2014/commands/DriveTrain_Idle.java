@@ -20,9 +20,13 @@ public class DriveTrain_Idle extends Command {
     }
     // Called just before this Command runs the first time
     protected void initialize() {
+        
         Robot.driveTrain.resetGyro();
         System.out.println("DTI: TimeToWait=" + m_dbTimeIdleS);
-        setTimeout(m_dbTimeIdleS);   
+        if (m_dbTimeIdleS > 0)
+        {
+            setTimeout(m_dbTimeIdleS);   
+        }
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
@@ -30,7 +34,7 @@ public class DriveTrain_Idle extends Command {
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isTimedOut();
+        return m_dbTimeIdleS > 0 && isTimedOut();
     }
     // Called once after isFinished returns true
     protected void end() {
