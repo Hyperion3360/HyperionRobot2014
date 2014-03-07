@@ -246,7 +246,7 @@ public class CanonAngle extends PIDSubsystem {
         
         int nbDonnesTrue = 0;
         int nbDonnesFail = 0;
-        for(int i = 0 ; i < 3 ; i++){
+        for(int i = 0 ; i < 1 ; i++){
             double distanceMesured = Robot.vision.GetDistanceCamera();
             if (distanceMesured == 0){
                 nbDonnesFail ++;
