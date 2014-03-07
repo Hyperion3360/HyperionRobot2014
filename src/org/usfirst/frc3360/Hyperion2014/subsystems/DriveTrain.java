@@ -64,7 +64,7 @@ public class DriveTrain extends PIDSubsystem {
     
     public void driveArcade(double linearSpeed, double rotationSpeed)
     {        
-        //System.out.println("driveArcade");
+        System.out.println("driveArcade linear speed = " + linearSpeed + ", angular speed = " + rotationSpeed);
         m_dbLinearSpeed = linearSpeed;
         setSetpoint(rotationSpeed);
     }
@@ -99,13 +99,13 @@ public class DriveTrain extends PIDSubsystem {
     }
     
     protected double returnPIDInput() {
-        //System.out.println("PID Read: Gyro rate = " + robotFrameGyro.getRate());
+        System.out.println("PID Read: Gyro rate = " + robotFrameGyro.getRate());
         SmartDashboard.putNumber("PID Read: Gyro rate", robotFrameGyro.getRate());
         return robotFrameGyro.getRate();
     }
 
     protected void usePIDOutput(double d) {
-        //System.out.println("PID Output: DriveTrain rotation output = " + -d);
+        System.out.println("PID Output: DriveTrain rotation output = " + -d);
         allWheelRobotDrive.arcadeDrive(m_dbLinearSpeed, -d);
     }
 }

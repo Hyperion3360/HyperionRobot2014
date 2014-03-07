@@ -18,8 +18,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousMode extends CommandGroup {
     
     public  AutonomousMode() {
+        addParallel(new DriveTrain_Idle(0));
         addSequential(new Canon_ShootTopGoal());
         addSequential(new DriveTrain_MoveTo(2));
+        addParallel(new DriveTrain_Idle(0));
         addSequential(new CanonSpinner_Brake());
     }
 }

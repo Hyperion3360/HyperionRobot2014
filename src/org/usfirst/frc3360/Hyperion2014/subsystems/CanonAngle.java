@@ -116,6 +116,7 @@ public class CanonAngle extends PIDSubsystem {
     {
         //System.out.println("HandleAngleMode: " + dbAngleDegree);
         setSetpoint(dbAngleDegree);
+        GetSonarDistance();
     }
     
     public void HandleVelocityMode(){
@@ -241,6 +242,21 @@ public class CanonAngle extends PIDSubsystem {
         allWheelAngleMotor.set(GetSafeSpeed(d));
     }
     
+    private double GetSonarDistance()
+    {
+        double dbSonarValue = m_anFrontSonar.getAverageVoltage();
+        double dbCurrentDistanceFeet = dbSonarValue * 1.9672799229 - 0.1434867439;
+        if (dbCurrentDistanceFeet < 0)
+        {
+            dbCurrentDistanceFeet = 0;
+        }
+        //System.out.print("Sonar voltage = " + dbSonarValue + ", distance= " + dbCurrentDistanceFeet);
+        SmartDashboard.putNumber("Front sonar voltage", dbSonarValue);
+        SmartDashboard.putNumber("Sonar measured distance", dbCurrentDistanceFeet); 
+        
+        return dbCurrentDistanceFeet;
+    }
+    
     public double getPerfectAngle(){
         m_dbCurrentDistanceFeet = 0;
         
@@ -261,42 +277,35 @@ public class CanonAngle extends PIDSubsystem {
             }
         }
         
-        if (nbDonnesTrue != 0 && m_bUseSonarForDistance)
+        if (m_bUseSonarForDistance)
         {
-            double dbSonarValue = m_anFrontSonar.getAverageVoltage();
-            m_dbCurrentDistanceFeet = dbSonarValue * 1.9672799229 - 0.1434867439;
-            System.out.print("Sonar voltage = " + dbSonarValue + ", distance= " + m_dbCurrentDistanceFeet);
-            SmartDashboard.putNumber("Front sonar voltage", dbSonarValue);
-            SmartDashboard.putNumber("Sonar measured distance", m_dbCurrentDistanceFeet);
+            m_dbCurrentDistanceFeet = GetSonarDistance();
+            System.out.println("Perfect angle using sonar value = " + m_dbCurrentDistanceFeet);
         }
         
-        if(nbDonnesTrue !=0){
-            Robot.LedsSetter.RemoveErrorBoolean();
-            m_dbCurrentDistanceFeet = m_dbCurrentDistanceFeet/nbDonnesTrue;
-            //formule a modifier****
-            m_dbAngleWanted = m_dbA * com.sun.squawk.util.MathUtils.pow(m_dbCurrentDistanceFeet, 5) +
-                              m_dbB * com.sun.squawk.util.MathUtils.pow(m_dbCurrentDistanceFeet, 4) +
-                              m_dbC * com.sun.squawk.util.MathUtils.pow(m_dbCurrentDistanceFeet, 3) +
-                              m_dbD * com.sun.squawk.util.MathUtils.pow(m_dbCurrentDistanceFeet, 2) +
-                              m_dbE * m_dbCurrentDistanceFeet +
-                              m_dbF;
-            //formule a modifier****
-            if(m_dbAngleWanted<0){
-                m_dbAngleWanted= 0;
-            }else if(m_dbAngleWanted > 90){            
-                m_dbAngleWanted= 90;
-            }
+        //formule a modifier****
+        m_dbAngleWanted = m_dbA * com.sun.squawk.util.MathUtils.pow(m_dbCurrentDistanceFeet, 5) +
+                          m_dbB * com.sun.squawk.util.MathUtils.pow(m_dbCurrentDistanceFeet, 4) +
+                          m_dbC * com.sun.squawk.util.MathUtils.pow(m_dbCurrentDistanceFeet, 3) +
+                          m_dbD * com.sun.squawk.util.MathUtils.pow(m_dbCurrentDistanceFeet, 2) +
+                          m_dbE * m_dbCurrentDistanceFeet +
+                          m_dbF;
+        //formule a modifier****
+        if(m_dbAngleWanted<0){
+            m_dbAngleWanted= 0;
+        }else if(m_dbAngleWanted > 90){            
+            m_dbAngleWanted= 90;
         }
-        else if(Robot.robotInstance.isAutonomous()){
-            m_dbAngleWanted = 48.6;
-            Robot.LedsSetter.RemoveErrorBoolean();
-        }else{
+        
+        if (nbDonnesTrue == 0){
             Robot.LedsSetter.ErrorBoolean();
-            m_dbAngleWanted = 49.2;
+        }
+        else
+        {
+            Robot.LedsSetter.RemoveErrorBoolean();
         }
         
-        
-        
+        System.out.println("Angle wanted = " + m_dbAngleWanted);
         SmartDashboard.putNumber("Angle Wanted: ", m_dbAngleWanted);
         
         return m_dbAngleWanted;

@@ -19,6 +19,7 @@ public class CanonAngle_SetShooterAngle extends Command {
     
     public CanonAngle_SetShooterAngle(boolean bShootAtPerfectAngle) {
         requires(Robot.canonAngle);
+        System.out.println("new CanonAngle_SetShooterAngle(" + bShootAtPerfectAngle + ")");
         m_dbAngleDegree = 0;
         m_bStopAtAngle = false;
         m_bShootAtPerfectAngle = bShootAtPerfectAngle;
@@ -26,6 +27,7 @@ public class CanonAngle_SetShooterAngle extends Command {
     
     public CanonAngle_SetShooterAngle(double dbAngleDegree) {
         requires(Robot.canonAngle);
+        System.out.println("new CanonAngle_SetShooterAngle(" + dbAngleDegree + ")");
         m_dbAngleDegree = dbAngleDegree;
         m_bStopAtAngle = false;
         m_bShootAtPerfectAngle = false;
@@ -33,6 +35,7 @@ public class CanonAngle_SetShooterAngle extends Command {
     
     public CanonAngle_SetShooterAngle(double dbAngleDegree, boolean bStopAtAngle) {
         requires(Robot.canonAngle);
+        System.out.println("new CanonAngle_SetShooterAngle(" + dbAngleDegree + "," + bStopAtAngle + ")");
         m_dbAngleDegree = dbAngleDegree;
         m_bStopAtAngle = bStopAtAngle;
         m_bShootAtPerfectAngle = false;
@@ -41,8 +44,9 @@ public class CanonAngle_SetShooterAngle extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
         if (m_bShootAtPerfectAngle)
-        {
+        {            
             m_dbAngleDegree = Robot.canonAngle.getPerfectAngle();
+            System.out.println("Start set Shooter Angle with perfet = " + m_dbAngleDegree);
         }
         System.out.println("Start set Shooter Angle = " + m_dbAngleDegree);
         

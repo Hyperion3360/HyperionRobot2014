@@ -16,6 +16,7 @@ public class DriveTrain_Idle extends Command {
     public DriveTrain_Idle(double dbTimeIdleS) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+        requires(Robot.driveTrain);
         m_dbTimeIdleS = dbTimeIdleS;
     }
     // Called just before this Command runs the first time
