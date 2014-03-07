@@ -58,9 +58,9 @@ public class CanonAngle extends PIDSubsystem {
     
     double m_dbAngleWanted;
     
-    double m_dbA = 0.37535;
-    double m_dbB = -7.87547;
-    double m_dbC = 92.3799*10;
+    double m_dbA = 0.150451;
+    double m_dbB = -4.74061;
+    double m_dbC = 85.4700;
     
     boolean m_bIsGoingDown = false;
     boolean m_bIsGoingUp = false;
@@ -275,6 +275,9 @@ public class CanonAngle extends PIDSubsystem {
                               (-7.87547)*(m_dbCurrentDistanceFeet)+
                               (9.23799*10);
             //formule a modifier****
+            if(m_dbAngleWanted<0){
+                m_dbAngleWanted= 0;
+            }
         }
         else if(Robot.robotInstance.isAutonomous()){
             m_dbAngleWanted = 58;
