@@ -35,8 +35,6 @@ import edu.wpi.first.wpilibj.image.NIVision;
  * floating around.
  */
 public class RobotMap {
-
-    public static AxisCamera m_camera;
     public static SpeedController canonAngleAllWheelAngleMotor;
     public static AnalogChannel canonAngleAnglePot;
     public static DigitalInput canonAngleUpperAngleLimitSwitch;
@@ -52,14 +50,8 @@ public class RobotMap {
     public static Compressor m_compressor;
     public static Relay ColorLedsRelay;
     public static Relay FlashingLedsRelay;
-    public static CriteriaCollection cc;
 
     public static void init() {
-
-        m_camera = AxisCamera.getInstance("10.33.60.11");
-
-        cc = new CriteriaCollection();
-
         visionFrontSonar = new AnalogChannel(2);
         visionFrontSonarSolenoidRelay = new Solenoid(3);
 
