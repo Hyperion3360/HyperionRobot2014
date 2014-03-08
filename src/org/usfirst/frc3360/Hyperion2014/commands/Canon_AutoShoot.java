@@ -16,18 +16,15 @@ import org.usfirst.frc3360.Hyperion2014.Robot;
 /**
  *
  */
-public class Canon_ShootTopGoal extends CommandGroup {
+public class Canon_AutoShoot extends CommandGroup {
     
-    public  Canon_ShootTopGoal() {
-        //System.out.println("new Canon_ShootTopGoal");
+    public  Canon_AutoShoot() {
+        System.out.println("new Canon_ShootTopGoal");
         
         addParallel(new CanonAngle_SetShooterAngle(true));
         addParallel(new CanonSpinner_Shoot());
         addSequential(new System_Wait(2));
         
-        addSequential(new CanonShooter_Shoot());    
-        
-        addSequential(new CanonSpinner_Cancel());
-        addSequential(new CanonAngle_Cancel());
+        addSequential(new CanonShooter_Shoot());
     }
 }

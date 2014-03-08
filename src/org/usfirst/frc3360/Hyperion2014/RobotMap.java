@@ -83,5 +83,7 @@ public class RobotMap {
         ms_gyDriveTrain = new Gyro(1, 1);
 	LiveWindow.addSensor("DriveTrain", "RobotFrameGyro", ms_gyDriveTrain);
         ms_gyDriveTrain.setSensitivity(0.007);
+        
+        ms_anVision_FrontSonar = new AnalogChannel(2);
     }
 }

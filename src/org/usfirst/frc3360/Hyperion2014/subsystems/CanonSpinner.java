@@ -35,16 +35,16 @@ public class CanonSpinner extends Subsystem {
     
     public double GetPresetShootSpeed()
     {
-        return 1;
+        return -1;
     }
     
     public double GetInitCatchSpeed(){
-        return -1;
+        return 1;
     }
     
     public double GetPresetCatchSpeed()
     {
-        return DriverStation.getInstance().getAnalogIn(2);
+        return DriverStation.getInstance().getAnalogIn(2) / 3.3;
     }
     
     public void PrepareShoot(double dbSpeed){

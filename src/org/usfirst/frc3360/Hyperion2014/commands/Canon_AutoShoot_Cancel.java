@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  * @author Developer
  */
-public class Canon_ShootTopGoal_Cancel extends CommandGroup {
+public class Canon_AutoShoot_Cancel extends CommandGroup {
     
-    public Canon_ShootTopGoal_Cancel() {
+    public Canon_AutoShoot_Cancel() {
         addSequential(new CanonAngle_Cancel());
         addSequential(new CanonSpinner_Cancel());
     }

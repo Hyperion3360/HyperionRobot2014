@@ -22,13 +22,13 @@ public class  CanonSpinner_Shoot extends Command {
     }
     // Called just before this Command runs the first time
     protected void initialize() {
-        System.out.println("startspin");
+        System.out.println("CS Shoot init");
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         double dbShootSpeed = 0;
         try {
-            if (DriverStation.getInstance().getEnhancedIO().getDigital(8))
+            if (!DriverStation.getInstance().getEnhancedIO().getDigital(8))
             {
                 dbShootSpeed = Robot.ms_canonSpinner.GetManualSpeed();                
             }
@@ -49,13 +49,13 @@ public class  CanonSpinner_Shoot extends Command {
     }
     // Called once after isFinished returns true
     protected void end() {
-        //System.out.println("stop spin - end");
+        System.out.println("CS Shoot - end");
         Robot.ms_canonSpinner.StopSpinning();
     }
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        //System.out.println("stop spin - int");
+        System.out.println("CS Shoot - int");
         Robot.ms_canonSpinner.StopSpinning();
     }
 }

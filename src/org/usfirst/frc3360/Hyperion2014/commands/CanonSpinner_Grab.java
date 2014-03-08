@@ -25,7 +25,7 @@ public class  CanonSpinner_Grab extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
-        System.out.println("CsRPinit");
+        System.out.println("CS Grab - init");
         m_bIsInit = false;
         setTimeout(0.2);
     }
@@ -42,13 +42,13 @@ public class  CanonSpinner_Grab extends Command {
         //System.out.println("catchspeed 1");
             double dbShootSpeed = 0;
             try {
-                if (DriverStation.getInstance().getEnhancedIO().getDigital(8))
+                if (!DriverStation.getInstance().getEnhancedIO().getDigital(8))
                 {
                     dbShootSpeed = Robot.ms_canonSpinner.GetManualSpeed();                
                 }
                 else
                 {
-                    dbShootSpeed = Robot.ms_canonSpinner.GetPresetShootSpeed();
+                    dbShootSpeed = Robot.ms_canonSpinner.GetPresetCatchSpeed();
                 }
             } catch (DriverStationEnhancedIO.EnhancedIOException ex) {
                 ex.printStackTrace();
@@ -64,11 +64,13 @@ public class  CanonSpinner_Grab extends Command {
     }
     // Called once after isFinished returns true
     protected void end() {
+        System.out.println("CS Grab - end");
         Robot.ms_canonSpinner.StopSpinning();
     }
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        System.out.println("CS Grab - int");
         Robot.ms_canonSpinner.StopSpinning();
     }
 }
