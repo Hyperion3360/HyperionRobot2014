@@ -26,7 +26,7 @@ public class Autonomous_2balls extends CommandGroup{
         
         // Move forward to eat the ball and wait a bit
         // to make sure the ball is in.        
-        addSequential(new DriveTrain_MoveTo(4));
+        addSequential(new DriveTrain_MoveTo(3.7));
         
         // Shoot the second ball
         addParallel(new DriveTrain_Idle(0));
