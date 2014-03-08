@@ -11,10 +11,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  * @author Developer
  */
-public class Canon_PrepareTopGoal extends CommandGroup {
+public class Canon_AutoGrab_Cancel extends CommandGroup {
     
-    public Canon_PrepareTopGoal() {
-        addParallel(new CanonSpinner_PrepareTopGoal());
-        addSequential(new CanonAngle_SetShooterAngle(true));
+    public Canon_AutoGrab_Cancel() {
+        addSequential(new CanonAngle_Cancel());
+        addSequential(new CanonSpinner_Cancel());
     }
 }

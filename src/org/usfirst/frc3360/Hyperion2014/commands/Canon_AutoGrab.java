@@ -12,16 +12,15 @@ import org.usfirst.frc3360.Hyperion2014.subsystems.CanonAngle;
  *
  * @author Hyperion3360
  */
-public class Canon_CopilotGrab extends CommandGroup {
+public class Canon_AutoGrab extends CommandGroup {
  
-    public Canon_CopilotGrab() {
-        addParallel(new CanonAngle_SetShooterAngle(CanonAngle.ms_MIN_CANON_ANGLE_VALUE));
-        addSequential(new CanonSpinner_ReceivePass());
+    public Canon_AutoGrab() {
+        addParallel(new CanonSpinner_Grab());
+        addSequential(new CanonAngle_SetShooterAngle(CanonAngle.ms_MIN_CANON_ANGLE_VALUE));
     }
     
-    public Canon_CopilotGrab(boolean bStopMotorAtEnd,
-                             boolean bCompleteAtAngle) {
-        addParallel(new CanonSpinner_ReceivePass(bStopMotorAtEnd));
+    public Canon_AutoGrab(boolean bCompleteAtAngle) {
+        addParallel(new CanonSpinner_Grab());
         addSequential(new CanonAngle_SetShooterAngle(CanonAngle.ms_MIN_CANON_ANGLE_VALUE, bCompleteAtAngle));
     }
 }

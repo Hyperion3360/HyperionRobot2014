@@ -25,11 +25,11 @@ public class  DriveTrain_MoveTo extends Command {
         m_dbDistanceM = dbDistanceM;
         m_dbTimeToTravelS = m_dbTopSpeedPV * m_dbPVOLTAGE_TO_SECOND_PER_METER * m_dbDistanceM;
         
-        requires(Robot.driveTrain);
+        requires(Robot.ms_driveTrain);
     }
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.driveTrain.enableFollowAngleMode();
+        Robot.ms_driveTrain.enableFollowAngleMode();
         //System.out.println("MT: Init move to Dist=" + m_dbDistanceM + ", %Voltage=" + m_dbTopSpeedPV + ", Time=" + m_dbTimeToTravelS);
         setTimeout(m_dbTimeToTravelS);        
     }
@@ -54,7 +54,7 @@ public class  DriveTrain_MoveTo extends Command {
         //System.out.println("Autonomous set speed = " + speedSent);
         
         // Go straight
-        Robot.driveTrain.driveArcade(speedSent, 0);
+        Robot.ms_driveTrain.driveArcade(speedSent, 0);
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
@@ -62,15 +62,15 @@ public class  DriveTrain_MoveTo extends Command {
     }
     // Called once after isFinished returns true
     protected void end() {
-        Robot.driveTrain.disableFollowAngle();
+        Robot.ms_driveTrain.disableFollowAngle();
         //System.out.println("MT: END");
-        Robot.driveTrain.driveForwardSpeed(0);
+        Robot.ms_driveTrain.driveForwardSpeed(0);
     }
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        Robot.driveTrain.disableFollowAngle();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        Robot.ms_driveTrain.disableFollowAngle();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
         //System.out.println("MT: INTERRUPT");
-        Robot.driveTrain.driveForwardSpeed(0);
+        Robot.ms_driveTrain.driveForwardSpeed(0);
     }
 }
