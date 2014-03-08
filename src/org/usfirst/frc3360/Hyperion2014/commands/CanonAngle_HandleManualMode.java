@@ -27,6 +27,7 @@ public class  CanonAngle_HandleManualMode extends Command {
         Robot.canonAngle.AngleStop();
         Robot.canonAngle.ResetSecurity();
         Robot.canonAngle.EnableAngleMode();
+        System.out.println("CaHmm init");
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {

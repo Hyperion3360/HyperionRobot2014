@@ -27,6 +27,7 @@ public class  CanonAngle_HandleAutoMode extends Command {
         Robot.canonAngle.AngleStop();
         Robot.canonAngle.EnableAngleMode();
         Robot.canonAngle.ResetSecurity();
+        System.out.println("CaHam init");
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
@@ -42,11 +43,14 @@ public class  CanonAngle_HandleAutoMode extends Command {
     }
     // Called once after isFinished returns true
     protected void end() {
+        System.out.println("anglehandle auto end");
+        
         CommandExit();
     }
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        System.out.println("anglehandle auto interrupt");
         CommandExit();
     }
     
