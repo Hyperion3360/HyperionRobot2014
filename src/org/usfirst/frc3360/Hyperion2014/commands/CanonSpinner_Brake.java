@@ -30,7 +30,7 @@ public class  CanonSpinner_Brake extends Command {
     protected void execute() {
      //   System.out.println("stopspin 1");
         Robot.canonSpinner.StopSpinning();
-     //   System.out.println("stopspin 2");
+        System.out.println("stopspin 2");
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
@@ -39,14 +39,14 @@ public class  CanonSpinner_Brake extends Command {
     // Called once after isFinished returns true
     protected void end() {
           Robot.canonSpinner.StopSpinning();
-          //System.out.println("CS-Brake end");
+          System.out.println("CS-Brake end");
 
     }
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
           Robot.canonSpinner.StopSpinning();
-          //System.out.println("CS-Brake int");
+          System.out.println("CS-Brake int");
 
     }
 }

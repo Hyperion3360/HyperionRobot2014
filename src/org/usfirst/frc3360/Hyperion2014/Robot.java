@@ -101,7 +101,7 @@ public class Robot extends IterativeRobot {
     }
     
     public void disabledInit() {
-        //System.out.println("Robot.disabledInit");
+        System.out.println("Robot.disabledInit");
         
         Robot.LedsSetter.FlashLedsPeriodic();
         Robot.LedsSetter.SetBumpersColor();

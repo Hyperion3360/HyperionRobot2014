@@ -19,14 +19,12 @@ public class AutonomousMode extends CommandGroup {
     
     public  AutonomousMode() {
         addParallel(new DriveTrain_Idle(0));
-       // addSequential(new Canon_ShootTopGoal());
-        
         addParallel(new CanonSpinner_PrepareTopGoal());
         addParallel(new CanonAngle_SetShooterAngle(45.6));
         addSequential(new SystemWait(2));
         addParallel(new CanonShooter_Shoot());
         addSequential(new SystemWait(1));
-        
+       
         addSequential(new DriveTrain_MoveTo(2));
         addParallel(new DriveTrain_Idle(0));
         addSequential(new CanonSpinner_Brake());
