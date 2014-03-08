@@ -79,6 +79,8 @@ public class RobotMap {
         canonShooterShooterSolenoid = new DoubleSolenoid(1, 1, 2);
 	LiveWindow.addActuator("CanonShooter", "ShooterSolenoid", canonShooterShooterSolenoid);
         
+        canonShooterShooterSolenoid.set(DoubleSolenoid.Value.kReverse);
+        
         driveTrainAllWheelRightMotor = new Talon(1, 2);
 	LiveWindow.addActuator("DriveTrain", "AllWheelRightMotor", (Talon) driveTrainAllWheelRightMotor);
         

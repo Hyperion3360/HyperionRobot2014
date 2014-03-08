@@ -44,7 +44,7 @@ public class CanonShooter extends Subsystem {
     
     public boolean IsFinishedShoot(){
         
-        if (ShootTime + pullBackTimeMs < System.currentTimeMillis()){
+        if ((ShootTime + pullBackTimeMs) < System.currentTimeMillis()){
         
         return true;
     }
