@@ -22,10 +22,12 @@ public class Canon_ShootTopGoal extends CommandGroup {
         //System.out.println("new Canon_ShootTopGoal");
         
         addParallel(new CanonAngle_SetShooterAngle(true));
-        addParallel(new CanonSpinner_PrepareTopGoal());
-        addSequential(new SystemWait(2));
-        addSequential(new CanonShooter_Shoot());
-        addSequential(new CanonSpinner_Brake());
-        addSequential(new CanonAngle_SetShooterAngle(45), 0.3);
+        addParallel(new CanonSpinner_Shoot());
+        addSequential(new System_Wait(2));
+        
+        addSequential(new CanonShooter_Shoot());    
+        
+        addSequential(new CanonSpinner_Cancel());
+        addSequential(new CanonAngle_Cancel());
     }
 }

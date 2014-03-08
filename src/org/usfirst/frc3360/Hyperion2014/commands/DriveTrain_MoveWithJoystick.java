@@ -15,16 +15,16 @@ import org.usfirst.frc3360.Hyperion2014.Robot;
  */
 public class  DriveTrain_MoveWithJoystick extends Command {
     public DriveTrain_MoveWithJoystick() {
-        requires(Robot.driveTrain);
+        requires(Robot.ms_driveTrain);
     }
     // Called just before this Command runs the first time
     protected void initialize() {
         //System.out.println("Init DT_MWJ");
-        Robot.driveTrain.resetGyro();
+        Robot.ms_driveTrain.resetGyro();
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.driveTrain.driveWithJoystick();
+        Robot.ms_driveTrain.driveWithJoystick();
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
@@ -33,12 +33,12 @@ public class  DriveTrain_MoveWithJoystick extends Command {
     // Called once after isFinished returns true
     protected void end() {
         //System.out.println("END DT_MWJ");
-        Robot.driveTrain.driveForwardSpeed(0);
+        Robot.ms_driveTrain.driveForwardSpeed(0);
     }
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
         //System.out.println("INT DT_MWJ");
-        Robot.driveTrain.driveForwardSpeed(0);
+        Robot.ms_driveTrain.driveForwardSpeed(0);
     }
 }

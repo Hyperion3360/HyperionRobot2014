@@ -18,7 +18,7 @@ public class CanonAngle_SetShooterAngle extends Command {
     boolean m_bShootAtPerfectAngle = false;
     
     public CanonAngle_SetShooterAngle(boolean bShootAtPerfectAngle) {
-        requires(Robot.canonAngle);
+        requires(Robot.ms_canonAngle);
         System.out.println("new CanonAngle_SetShooterAngle(" + bShootAtPerfectAngle + ")");
         m_dbAngleDegree = 0;
         m_bStopAtAngle = false;
@@ -26,7 +26,7 @@ public class CanonAngle_SetShooterAngle extends Command {
     }
     
     public CanonAngle_SetShooterAngle(double dbAngleDegree) {
-        requires(Robot.canonAngle);
+        requires(Robot.ms_canonAngle);
         System.out.println("new CanonAngle_SetShooterAngle(" + dbAngleDegree + ")");
         m_dbAngleDegree = dbAngleDegree;
         m_bStopAtAngle = false;
@@ -34,7 +34,7 @@ public class CanonAngle_SetShooterAngle extends Command {
     }
     
     public CanonAngle_SetShooterAngle(double dbAngleDegree, boolean bStopAtAngle) {
-        requires(Robot.canonAngle);
+        requires(Robot.ms_canonAngle);
         System.out.println("new CanonAngle_SetShooterAngle(" + dbAngleDegree + "," + bStopAtAngle + ")");
         m_dbAngleDegree = dbAngleDegree;
         m_bStopAtAngle = bStopAtAngle;
@@ -45,28 +45,27 @@ public class CanonAngle_SetShooterAngle extends Command {
     protected void initialize() {
         if (m_bShootAtPerfectAngle)
         {            
-            m_dbAngleDegree = Robot.canonAngle.getPerfectAngle();
+            m_dbAngleDegree = Robot.ms_canonAngle.getPerfectAngle();
             System.out.println("Start set Shooter Angle with perfet = " + m_dbAngleDegree);
         }
         System.out.println("Start set Shooter Angle = " + m_dbAngleDegree);
         
-        Robot.canonAngle.AngleStop();
-        Robot.canonAngle.ResetSecurity();
-        Robot.canonAngle.EnableAngleMode();
+        Robot.ms_canonAngle.AngleStop();
+        Robot.ms_canonAngle.ResetSecurity();
+        Robot.ms_canonAngle.EnableAngleMode();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        
-        Robot.canonAngle.HandleAngleMode(m_dbAngleDegree);
+        Robot.ms_canonAngle.HandleAngleMode(m_dbAngleDegree);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         boolean bIsFinished = false;
         if (m_bStopAtAngle && 
-            ((Robot.canonAngle.getCurrentAngle() < m_dbAngleDegree + 1) &&
-             (Robot.canonAngle.getCurrentAngle() > m_dbAngleDegree - 1)))
+            ((Robot.ms_canonAngle.getCurrentAngle() < m_dbAngleDegree + 1) &&
+             (Robot.ms_canonAngle.getCurrentAngle() > m_dbAngleDegree - 1)))
         {
             bIsFinished = true;
         }
@@ -86,6 +85,6 @@ public class CanonAngle_SetShooterAngle extends Command {
     }
     
     private void CommandExit() {
-        Robot.canonAngle.DisableAngleMode();
+        Robot.ms_canonAngle.DisableAngleMode();
     }
 }

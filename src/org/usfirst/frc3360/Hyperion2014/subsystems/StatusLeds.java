@@ -9,98 +9,92 @@
 // it from being updated in the future.
 package org.usfirst.frc3360.Hyperion2014.subsystems;
 
-
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc3360.Hyperion2014.RobotMap;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStationEnhancedIO;
-import edu.wpi.first.wpilibj.Timer;
+import org.usfirst.frc3360.Hyperion2014.commands.StatusLeds_Handle;
 
 /**
  *
  */
-public class LedsSetter extends Subsystem {
-    
-    Relay ColorLedsRelay = RobotMap.ColorLedsRelay;
-    Relay FlashingLedsRelay = RobotMap.FlashingLedsRelay;
+public class StatusLeds extends Subsystem {
+
+    boolean m_bTeamColor = false;
+    Relay ColorLedsRelay = RobotMap.ms_rlTeamColorLeds;
+    Relay FlashingLedsRelay = RobotMap.ms_rlCanonStatusLeds;
     double LastFlashTimeMs = System.currentTimeMillis();
     boolean m_bIsError;
     boolean m_FlashState = false;
 
-   
     public void initDefaultCommand() {
-        
+        setDefaultCommand(new StatusLeds_Handle());
     }
     
+    public void handleSubsystem(){
+        flashLedsPeriodic();
+        setTeamColor();
+    }
+    public void ErrorBoolean() {
+        m_bIsError = true;
+    }
+
+    public void RemoveErrorBoolean() {
+        m_bIsError = false;
+    }
+
+    public void SetBumpersColor() {
+        double dbColorValue = 0;
+        try {
+            dbColorValue = DriverStation.getInstance().getEnhancedIO().getAnalogIn(6);
+        } catch (DriverStationEnhancedIO.EnhancedIOException ex) {
+            ex.printStackTrace();
+        }
+
+        m_bTeamColor = dbColorValue > 1.5;
+    }
     
-    public void FlashLedsPeriodic(){
-        
+    void setTeamColor()
+    {
+        if (m_bTeamColor) {
+            ColorLedsRelay.set(Relay.Value.kForward);
+        } else {
+            ColorLedsRelay.set(Relay.Value.kReverse);
+        }
+    }
+
+    public void flashLedsPeriodic() {
+
         double flashTimeMs = 1;
         try {
             flashTimeMs = DriverStation.getInstance().getEnhancedIO().getAnalogIn(8) * 1000;
-            
-            if(flashTimeMs > 2500){
+
+            if (flashTimeMs > 2500) {
                 flashTimeMs = 10000000;
             }
         } catch (DriverStationEnhancedIO.EnhancedIOException ex) {
             ex.printStackTrace();
         }
-        
+
         //System.out.println("FlashTime" + flashTimeMs);
-        
-        if ((System.currentTimeMillis() - LastFlashTimeMs) > flashTimeMs){
+        if ((System.currentTimeMillis() - LastFlashTimeMs) > flashTimeMs) {
             // Initiate FLASH;
             m_FlashState = false;
-            
+
             LastFlashTimeMs = System.currentTimeMillis();
-        }
-        else if ((System.currentTimeMillis() - LastFlashTimeMs) > (0.1 * flashTimeMs))
-        {
+        } else if ((System.currentTimeMillis() - LastFlashTimeMs) > (0.1 * flashTimeMs)) {
             m_FlashState = true;
         }
-        
-        if (m_FlashState)
-        {
-            if (!m_bIsError)
-            {
+
+        if (m_FlashState) {
+            if (!m_bIsError) {
                 FlashingLedsRelay.set(Relay.Value.kForward);
-            }
-            else
-            {
+            } else {
                 FlashingLedsRelay.set(Relay.Value.kReverse);
             }
+        } else {
+            FlashingLedsRelay.set(Relay.Value.kOn);
         }
-        else
-        {
-            FlashingLedsRelay.set(Relay.Value.kOn);           
-        }
-    }
-    public void ErrorBoolean(){
-        m_bIsError = true;
-    }
-    
-    public void RemoveErrorBoolean()
-    {
-        m_bIsError = false;        
-    }
-    
-    public void SetBumpersColor(){
-        
-        double ColorValue = 0;
-        try {
-            ColorValue = DriverStation.getInstance().getEnhancedIO().getAnalogIn(6);
-        } catch (DriverStationEnhancedIO.EnhancedIOException ex) {
-            ex.printStackTrace();
-        }
-        
-        if(ColorValue > 1.5){
-            
-            ColorLedsRelay.set(Relay.Value.kForward);
-        }
-        else{
-            ColorLedsRelay.set(Relay.Value.kReverse);
-        }
-        
     }
 }
