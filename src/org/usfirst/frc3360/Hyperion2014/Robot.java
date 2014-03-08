@@ -33,7 +33,7 @@ public class Robot extends IterativeRobot {
         
         ms_robotInstance = this;
 	RobotMap.init();
-        
+
         ms_canonAngle = new CanonAngle();
         ms_canonSpinner = new CanonSpinner();
         ms_canonShooter = new CanonShooter();
@@ -85,7 +85,7 @@ public class Robot extends IterativeRobot {
     }
     
     public void disabledInit() {
-        //System.out.println("Robot.disabledInit");
+        System.out.println("Robot.disabledInit");
         
         // Make sure the autonomous command is canceled.
         if (autonomousCommand != null) autonomousCommand.cancel();

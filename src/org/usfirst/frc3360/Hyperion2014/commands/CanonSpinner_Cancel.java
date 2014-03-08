@@ -19,19 +19,20 @@ public class  CanonSpinner_Cancel extends Command {
     }
     // Called just before this Command runs the first time
     protected void initialize() {
-        //System.out.println("Brake -INIT1");
+        System.out.println("CsB init");
         Robot.ms_canonSpinner.StopSpinning();
-        //System.out.println("Brake -INIT2");
     }
+
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
      //   System.out.println("stopspin 1");
-     //   System.out.println("stopspin 2");
     }
+
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return true;
     }
+
     // Called once after isFinished returns true
     protected void end() {
           //System.out.println("CS-Brake end");

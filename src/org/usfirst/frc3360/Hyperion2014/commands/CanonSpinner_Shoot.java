@@ -22,7 +22,7 @@ public class  CanonSpinner_Shoot extends Command {
     }
     // Called just before this Command runs the first time
     protected void initialize() {
-        //System.out.println("startspin");
+        System.out.println("startspin");
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
@@ -42,7 +42,6 @@ public class  CanonSpinner_Shoot extends Command {
    //     System.out.println("topspeed 1");
         Robot.ms_canonSpinner.PrepareShoot(dbShootSpeed);
      //   System.out.println("topspeed 2");
-        
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
@@ -56,7 +55,6 @@ public class  CanonSpinner_Shoot extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        
         //System.out.println("stop spin - int");
         Robot.ms_canonSpinner.StopSpinning();
     }

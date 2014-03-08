@@ -25,6 +25,7 @@ public class  CanonSpinner_Grab extends Command {
     
     // Called just before this Command runs the first time
     protected void initialize() {
+        System.out.println("CsRPinit");
         m_bIsInit = false;
         setTimeout(0.2);
     }

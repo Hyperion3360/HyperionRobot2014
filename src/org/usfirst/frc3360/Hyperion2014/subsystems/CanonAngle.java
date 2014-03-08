@@ -202,14 +202,13 @@ public class CanonAngle extends PIDSubsystem {
         m_dbCurrentDistanceFeet = GetSonarDistance();
         System.out.println("Perfect angle using sonar value = " + m_dbCurrentDistanceFeet);
 
-        //formule a modifier****
         m_dbAngleWanted = m_dbA * com.sun.squawk.util.MathUtils.pow(m_dbCurrentDistanceFeet, 5)
                 + m_dbB * com.sun.squawk.util.MathUtils.pow(m_dbCurrentDistanceFeet, 4)
                 + m_dbC * com.sun.squawk.util.MathUtils.pow(m_dbCurrentDistanceFeet, 3)
                 + m_dbD * com.sun.squawk.util.MathUtils.pow(m_dbCurrentDistanceFeet, 2)
                 + m_dbE * m_dbCurrentDistanceFeet
                 + m_dbF;
-        //formule a modifier****
+
         if (m_dbAngleWanted < 0) {
             m_dbAngleWanted = 0;
         } else if (m_dbAngleWanted > 90) {
