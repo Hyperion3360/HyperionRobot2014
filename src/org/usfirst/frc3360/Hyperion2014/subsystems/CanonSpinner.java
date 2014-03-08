@@ -69,7 +69,7 @@ public class CanonSpinner extends Subsystem {
     
     public void HandleSpinnerPresetMode(){
         
-        double CatchSpeed = DriverStation.getInstance().getAnalogIn(2);
+        double CatchSpeed = DriverStation.getInstance().getAnalogIn(2) / 3.3;
         // the axis 2 is a screw potentiometer directly on the driver station to adjust the catch speed
        // System.out.println("axis 3 (catch speed)" + Robot.oi.getCoPilotJoystick().getRawAxis(3));
         m_dbCatchSpeed = CatchSpeed;
