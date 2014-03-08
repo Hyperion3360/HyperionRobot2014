@@ -4,7 +4,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc3360.Hyperion2014.commands.CanonAngle_Cancel;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonAngle_ResetSecurity;
+import org.usfirst.frc3360.Hyperion2014.commands.CanonAngle_SetShooterAngle;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonShooter_Shoot;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_Cancel;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_Shoot;
@@ -35,7 +37,9 @@ public class OI {
     Command m_cmdCanon_AutoGrab;
     Command m_cmdCanonSpinner_Shoot;
     Command m_cmdCanonSpinner_Grab;
-        
+    public JoystickButton  Button_ResetShooterMIN;
+    public JoystickButton  Button_ResetShooterMAX;
+
     public OI() {
         m_cmdCanon_AutoShoot = new Canon_AutoShoot();
         m_cmdCanon_AutoGrab = new Canon_AutoGrab();
@@ -76,6 +80,14 @@ public class OI {
         Button_CanonSpinner_CatchSpeed = new DigitalIOButton(4);
         Button_CanonSpinner_CatchSpeed.whileHeld(m_cmdCanonSpinner_Grab);
         Button_CanonSpinner_CatchSpeed.whenReleased(new CanonSpinner_Cancel());
+
+        Button_ResetShooterMIN = new JoystickButton(driverRightJoystick, 6);
+        Button_ResetShooterMIN.whileHeld(new CanonAngle_SetShooterAngle(8));
+        Button_ResetShooterMIN.whenReleased(new CanonAngle_Cancel());
+        
+        Button_ResetShooterMAX = new JoystickButton(driverRightJoystick, 11);
+        Button_ResetShooterMAX.whileHeld(new CanonAngle_SetShooterAngle(90));
+        Button_ResetShooterMAX.whenReleased(new CanonAngle_Cancel());
     }
 
     public Joystick getDriverLeftJoystick() {

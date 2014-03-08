@@ -70,7 +70,7 @@ public class CanonAngle extends PIDSubsystem {
         getPIDController().setContinuous(false);
         getPIDController().setInputRange(ms_MIN_CANON_ANGLE_VALUE, ms_MAX_CANON_ANGLE_VALUE);
         getPIDController().setOutputRange(-1, 1);
-        getPIDController().setPercentTolerance(5);
+        getPIDController().setPercentTolerance(4);
     }
 
     // Put methods for controlling this subsystem
