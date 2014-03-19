@@ -41,7 +41,6 @@ public class CanonSpinner extends Subsystem {
     }
     
     public void PrepareTopGoalShot(){
-        //Est ce que cette fonction s execute tjrs pcq sinon on pourra pas compter le temps
         if(m_dbSpinStartTime == 0){
             m_dbSpinStartTime = System.currentTimeMillis();
         }
