@@ -23,9 +23,11 @@ import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_HandlePresetMode;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_PrepareTopGoal;
 import org.usfirst.frc3360.Hyperion2014.commands.CanonSpinner_ReceivePass;
 import org.usfirst.frc3360.Hyperion2014.commands.Canon_CancelPrepareTopGoal;
+import org.usfirst.frc3360.Hyperion2014.commands.Canon_CoPilotSetAngleZone;
 import org.usfirst.frc3360.Hyperion2014.commands.Canon_CopilotGrab;
 import org.usfirst.frc3360.Hyperion2014.commands.Canon_PrepareTopGoal;
-import org.usfirst.frc3360.Hyperion2014.commands.Canon_ShootTopGoal;
+import org.usfirst.frc3360.Hyperion2014.commands.Canon_ShootTopGoalAutonomous;
+import org.usfirst.frc3360.Hyperion2014.commands.Canon_ShootTopGoalTeleop;
 import org.usfirst.frc3360.Hyperion2014.commands.DriveTrain_MoveTo;
 
 /**
@@ -42,6 +44,8 @@ public class OI {
     public JoystickButton Button_DriverCanon_PrepareTopGoal;
     public JoystickButton Button_DriverCanon_Shoot;
 
+    public DigitalIOButton Button_Canon_SetAngleWhiteZone;
+    
     public DigitalIOButton Button_CanonShooter_Shoot;
 
     public DigitalIOButton Button_CanonSpinner_SetManualMode;
@@ -61,7 +65,12 @@ public class OI {
         driverRightJoystick = new Joystick(2);
         driverLeftJoystick = new Joystick(1);
         
-        Button_DriverCanon_PrepareTopGoal = new JoystickButton(driverLeftJoystick, 6);
+        Button_Canon_SetAngleWhiteZone = new DigitalIOButton(x);
+        Button_Canon_SetAngleWhiteZone.whileHeld(new Canon_CoPilotSetAngleZone());
+        Button_Canon_SetAngleWhiteZone.whenReleased(new Canon_CancelPrepareTopGoal());
+        Button_Canon_SetAngleWhiteZone.whenReleased(new CanonAngle_HandleManualMode());
+        
+        Button_DriverCanon_PrepareTopGoal = new JoystickButton(driverLeftJoystick, 1);
         Button_DriverCanon_PrepareTopGoal.whileHeld(new Canon_PrepareTopGoal());
         Button_DriverCanon_PrepareTopGoal.whenReleased(new Canon_CancelPrepareTopGoal());
         
@@ -69,13 +78,13 @@ public class OI {
         Button_DriverCanon_Shoot.whenPressed(new CanonShooter_Shoot());
         
         Button_Canon_PilotShootAuto = new JoystickButton(driverRightJoystick, 1);
-        Button_Canon_PilotShootAuto.whileHeld(new Canon_ShootTopGoal());
+        Button_Canon_PilotShootAuto.whileHeld(new Canon_ShootTopGoalTeleop());
         Button_Canon_PilotShootAuto.whenInactive(new CanonAngle_HandleManualMode());
 
         Button_DriveTrain_MoveTo = new JoystickButton(driverRightJoystick, 9);
         Button_DriveTrain_MoveTo.whenPressed(new DriveTrain_MoveTo(2));
 
-        Button_Canon_CopilotGrab = new JoystickButton(driverLeftJoystick, 1);
+        Button_Canon_CopilotGrab = new JoystickButton(driverLeftJoystick, 2);
         Button_Canon_CopilotGrab.whileHeld(new Canon_CopilotGrab());
         Button_Canon_CopilotGrab.whenInactive(new CanonAngle_HandleManualMode());
 

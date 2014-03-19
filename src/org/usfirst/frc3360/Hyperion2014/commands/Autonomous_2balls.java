@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Autonomous_2balls extends CommandGroup{
     
     public Autonomous_2balls() {
+        
         // Shoot first ball, and wait a few to make sure one on two
         // in the hot goal (hence the wait).
         addParallel(new CanonSpinner_PrepareTopGoal());
@@ -32,7 +33,7 @@ public class Autonomous_2balls extends CommandGroup{
         addParallel(new DriveTrain_Idle(0));
         // Prepare the able and let the ball the time to enter.
         addSequential(new CanonAngle_SetShooterAngle(55), 1.75);
-        addSequential(new Canon_ShootTopGoal());
+        addSequential(new Canon_ShootTopGoalAutonomous());
         addSequential(new DriveTrain_MoveTo(1.5));
         
         addSequential(new DriveTrain_Idle(0));

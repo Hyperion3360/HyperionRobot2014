@@ -23,7 +23,7 @@ public class CanonSpinner extends Subsystem {
 
     SpeedController allWheelSpinnerMotor = RobotMap.canonSpinnerAllWheelSpinnerMotor;
     
-    
+    double m_dbSpinStartTime = 0;
     double m_dbCatchSpeed = 0.6;
     double m_dbShootSpeed = -1;
     
@@ -40,6 +40,13 @@ public class CanonSpinner extends Subsystem {
     }
     
     public void PrepareTopGoalShot(){
+        if(m_dbSpinStartTime == 0){
+            m_dbSpinStartTime = System.currentTimeMillis();
+        }
+        if(m_dbSpinStartTime >= 2000){
+            Robot.LedsSetter.ErrorBoolean();
+        }
+        
         allWheelSpinnerMotor.set(m_dbShootSpeed);
     }
     
@@ -48,6 +55,8 @@ public class CanonSpinner extends Subsystem {
     }
     
     public void StopSpinning(){
+        Robot.LedsSetter.RemoveErrorBoolean();
+        m_dbSpinStartTime = 0;
         allWheelSpinnerMotor.set(0);
     }
     
