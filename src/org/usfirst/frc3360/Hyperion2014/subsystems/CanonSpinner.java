@@ -24,6 +24,7 @@ public class CanonSpinner extends Subsystem {
     SpeedController allWheelSpinnerMotor = RobotMap.canonSpinnerAllWheelSpinnerMotor;
     
     double m_dbSpinStartTime = 0;
+    double m_dbSpinCurrentTime = 0;
     double m_dbCatchSpeed = 0.6;
     double m_dbShootSpeed = -1;
     
@@ -40,10 +41,12 @@ public class CanonSpinner extends Subsystem {
     }
     
     public void PrepareTopGoalShot(){
+        //Est ce que cette fonction s execute tjrs pcq sinon on pourra pas compter le temps
         if(m_dbSpinStartTime == 0){
             m_dbSpinStartTime = System.currentTimeMillis();
         }
-        if(m_dbSpinStartTime >= 2000){
+        m_dbSpinCurrentTime = System.currentTimeMillis();
+        if((m_dbSpinCurrentTime - m_dbSpinStartTime) >= 2000){
             Robot.LedsSetter.ErrorBoolean();
         }
         
