@@ -65,13 +65,13 @@ public class OI {
         driverRightJoystick = new Joystick(2);
         driverLeftJoystick = new Joystick(1);
         
-        Button_Canon_SetAngleWhiteZone = new DigitalIOButton(x);
+        Button_Canon_SetAngleWhiteZone = new DigitalIOButton(3);
         Button_Canon_SetAngleWhiteZone.whileHeld(new Canon_CoPilotSetAngleZone());
         Button_Canon_SetAngleWhiteZone.whenReleased(new Canon_CancelPrepareTopGoal());
         Button_Canon_SetAngleWhiteZone.whenReleased(new CanonAngle_HandleManualMode());
         
         Button_DriverCanon_PrepareTopGoal = new JoystickButton(driverLeftJoystick, 1);
-        Button_DriverCanon_PrepareTopGoal.whileHeld(new Canon_PrepareTopGoal());
+        Button_DriverCanon_PrepareTopGoal.whileHeld(new CanonSpinner_PrepareTopGoal());
         Button_DriverCanon_PrepareTopGoal.whenReleased(new Canon_CancelPrepareTopGoal());
         
         Button_DriverCanon_Shoot = new JoystickButton(driverLeftJoystick, 7);
