@@ -18,7 +18,7 @@ public class Autonomous_2balls extends CommandGroup{
         // Shoot first ball, and wait a few to make sure one on two
         // in the hot goal (hence the wait).
         addParallel(new CanonSpinner_PrepareTopGoal());
-        addParallel(new CanonAngle_SetShooterAngle(50));
+        addParallel(new CanonAngle_SetShooterAngle(52.6));
         addSequential(new SystemWait(2));
         addSequential(new CanonShooter_Shoot());
         

@@ -47,7 +47,7 @@ public class CanonSpinner extends Subsystem {
             m_dbSpinStartTime = System.currentTimeMillis();
         }
         m_dbSpinCurrentTime = System.currentTimeMillis();
-        if((m_dbSpinCurrentTime - m_dbSpinStartTime) >= 1300){
+        if((m_dbSpinCurrentTime - m_dbSpinStartTime) >= 1500){
             Robot.LedsSetter.ErrorBoolean();
         }
         

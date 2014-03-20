@@ -22,7 +22,7 @@ public class Canon_ShootTopGoalTeleop extends CommandGroup {
         //System.out.println("new Canon_ShootTopGoalAutonomous");
         
         addParallel(new CanonAngle_SetShooterAngle(true));
-        addSequential(new SystemWait(1.4));
+        addSequential(new SystemWait(0.8));
         addSequential(new CanonShooter_Shoot());
         addSequential(new CanonAngle_SetShooterAngle(45), 0.3);
     }
