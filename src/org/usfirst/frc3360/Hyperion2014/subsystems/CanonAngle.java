@@ -73,12 +73,17 @@ public class CanonAngle extends PIDSubsystem {
     boolean m_bElevationStop = false;
     boolean m_bLoweringStop = false;
     
+    double m_dbBallPresure = 0;
+    
     public CanonAngle() {
         super("CanonAngle", 0.07, .0001, 0);
         getPIDController().setContinuous(false);
         getPIDController().setInputRange(ms_MIN_CANON_ANGLE_VALUE, ms_MAX_CANON_ANGLE_VALUE);
         getPIDController().setOutputRange(-1, 1);
-        getPIDController().setPercentTolerance(4);
+        getPIDController().setPercentTolerance(5);
+        
+        m_dbBallPresure = DriverStation.getInstance().getAnalogIn(5);
+        m_dbBallPresure = (-2.12 * m_dbBallPresure) + 3.5;
     }
     
     // Put methods for controlling this subsystem
@@ -116,7 +121,7 @@ public class CanonAngle extends PIDSubsystem {
     public void HandleAngleMode(double dbAngleDegree)
     {
         //System.out.println("HandleAngleMode: " + dbAngleDegree);
-        setSetpoint(dbAngleDegree);
+        setSetpoint(dbAngleDegree + m_dbBallPresure);
         GetSonarDistance();
     }
     

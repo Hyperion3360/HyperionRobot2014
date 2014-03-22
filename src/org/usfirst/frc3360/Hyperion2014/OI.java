@@ -51,7 +51,7 @@ public class OI {
     public DigitalIOButton Button_CanonSpinner_SetManualMode;
     public DigitalIOButton Button_CanonSpinner_ShootSpeed;
     public DigitalIOButton Button_CanonSpinner_CatchSpeed;
-
+    
     public DigitalIOButton Button_CanonAngle_SetManualMode;
     public DigitalIOButton Button_CanonAngle_SetAutoAngle;
     
