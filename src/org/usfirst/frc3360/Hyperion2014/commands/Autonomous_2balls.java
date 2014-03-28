@@ -6,6 +6,7 @@
 package org.usfirst.frc3360.Hyperion2014.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc3360.Hyperion2014.Robot;
 
 /**
  *
@@ -18,7 +19,7 @@ public class Autonomous_2balls extends CommandGroup{
         // Shoot first ball, and wait a few to make sure one on two
         // in the hot goal (hence the wait).
         addParallel(new CanonSpinner_PrepareTopGoal());
-        addParallel(new CanonAngle_SetShooterAngle(52.6));
+        addParallel(new CanonAngle_SetShooterAngle(50));
         addSequential(new SystemWait(2));
         addSequential(new CanonShooter_Shoot());
         

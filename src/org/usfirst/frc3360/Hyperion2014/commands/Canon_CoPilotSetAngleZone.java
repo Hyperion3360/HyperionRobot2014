@@ -21,7 +21,7 @@ public class Canon_CoPilotSetAngleZone extends CommandGroup {
     public  Canon_CoPilotSetAngleZone() {
         //System.out.println("new Canon_ShootTopGoal");
         
-        addParallel(new CanonAngle_SetShooterAngle(50.4));
+        addParallel(new CanonAngle_SetShooterAngle(49.5));
         addSequential(new CanonSpinner_PrepareTopGoal());
     }
 }
